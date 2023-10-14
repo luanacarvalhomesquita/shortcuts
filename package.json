@@ -3,7 +3,8 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "fix:eslint": "eslint --ext .js,.vue resources/js/ --fix"
     },
     "devDependencies": {
         "@vitejs/plugin-vue": "^4.4.0",
@@ -15,6 +16,8 @@
         "vue": "^3.3.4"
     },
     "dependencies": {
-        "@inertiajs/vue3": "^1.0.12"
+        "@inertiajs/vue3": "^1.0.12",
+        "eslint": "^8.51.0",
+        "eslint-plugin-vue": "^9.17.0"
     }
 }
