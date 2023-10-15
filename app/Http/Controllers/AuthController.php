@@ -25,7 +25,7 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended();
+        return redirect()->route('home')->with('success', 'Autenticado com sucesso!');
     }
 
     public function destroy()
