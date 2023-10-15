@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\PagesVue;
 use App\Models\Shortcut;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
 {
@@ -14,6 +15,7 @@ class IndexController extends Controller
 
     public function __invoke(Request $request)
     {
+        dd(Auth::user());
         $page = $request->input('page', 1);
         $pageSize = $request->input('pageSize', 10);
 
