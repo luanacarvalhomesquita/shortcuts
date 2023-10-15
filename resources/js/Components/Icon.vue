@@ -27,7 +27,6 @@ export default {
 
 <style scoped>
 .icon-presentation {
-    background-image: url('/icons/your-image.png');
     width: 80vh;
     height: 50vh;
     margin: 1rem;

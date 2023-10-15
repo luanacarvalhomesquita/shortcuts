@@ -14,6 +14,11 @@ class IndexController extends Controller
 
     public function __invoke(Request $request)
     {
+        $hasSession = $request->user();
+        if(!$hasSession) {
+            return redirect()->route('login');
+        }
+
         $page = $request->input('page', 1);
         $pageSize = $request->input('pageSize', 10);
 

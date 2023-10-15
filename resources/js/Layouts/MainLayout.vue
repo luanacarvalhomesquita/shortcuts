@@ -1,7 +1,10 @@
 <template>
   <div>
     <Link href="/">Main Page</Link>
-    <Link href="/login">Login</Link>
+    <Link href="/logout">Logout</Link>
+  </div>
+  <div class="flex" v-if="user">
+    Olá, {{ user.name }}! 
   </div>
 
   <div v-if="flashSuccess" class="success">
@@ -16,8 +19,10 @@ import { Link, usePage } from '@inertiajs/vue3'
 import { computed } from 'vue';
 
 const page = usePage()
-const flashSuccess = computed(() => page.props.value.flash.success);
-
+const flashSuccess = computed(() => page.props.flash.success)
+const user = computed(
+    () => page.props.user
+)
 </script>
 
 
