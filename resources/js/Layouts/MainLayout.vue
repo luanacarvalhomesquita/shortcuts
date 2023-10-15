@@ -1,10 +1,10 @@
 <template>
   <div>
     <Link href="/">Main Page</Link>
-    <Link href="/logout">Logout</Link>
+    <Link href="/logout" method="DELETE" as="button">Logout</Link>
   </div>
   <div class="flex" v-if="user">
-    Olá, {{ user.name }}! 
+    Olá, {{ user.name }}!
   </div>
 
   <div v-if="flashSuccess" class="success">

@@ -12,6 +12,10 @@ class AuthController extends Controller
 {
     public function create()
     {
+        if(Auth::check()) {
+            return redirect()->intended();
+        }
+
         return inertia(PagesVue::PAGE_LOGIN);
     }
 
@@ -26,7 +30,7 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended('/')->with('success', 'Autenticado com sucesso!');
+        return redirect()->intended()->with('success', 'Autenticado com sucesso!');
     }
 
     public function destroy(Request $request)
