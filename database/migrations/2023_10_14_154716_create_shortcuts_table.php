@@ -16,9 +16,11 @@ return new class extends Migration
             $table->string('title');
             $table->text('note')->nullable();
             $table->string('link');
-            $table->binary('image')->nullable();
+            $table->string('mime')->nullable();
             $table->timestamps();
         });
+
+        DB::statement("ALTER TABLE shortcuts ADD file  LONGBLOB");
     }
 
     /**

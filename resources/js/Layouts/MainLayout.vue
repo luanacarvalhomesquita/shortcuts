@@ -1,22 +1,35 @@
 <template>
-  <div>
-    <Link href="/">Main Page</Link>
-    <Link href="/logout" method="DELETE" as="button">Logout</Link>
-  </div>
-  <div class="flex" v-if="user">
-    Olá, {{ user.name }}!
-  </div>
+    <header class="bg-primary dark:bg-gray-800 p-1 justify-between flex">
+        <div></div>
+        <div>
+            <Link class="text-lg text-secondary_100" href="/">ATALHOS</Link>
+        </div>
+        <div class="flex">
+            <Link href="/logout" method="DELETE" as="button" class="flex items-center">
+                <span class="pr-2 text-xs underline text-secondary_100">Sair</span>
+                <Icon className="icon-sm" imagePath="/icons/logout.svg" altName="Icone Presentation" />
+            </Link>
+        </div>
+    </header>
 
-  <div v-if="flashSuccess" class="success">
-    {{ flashSuccess }}
-  </div>
+    <main class="container mx-auto p-4 w-full shadow shadow-secondary_300 h-screen my-4">
+        <div v-if="flashSuccess" class="success">
+            {{ flashSuccess }}
+        </div>
+        <div class="flex py-5 " v-if="user">
+            <span>Olá, {{ user.name }}! Que tal pegar um atalho hoje? :)</span>
+        </div>
 
-  <slot>Default</slot>
+        <div>
+            <slot>Default</slot>
+        </div>
+  </main>
 </template>
 
 <script setup>
 import { Link, usePage } from '@inertiajs/vue3'
 import { computed } from 'vue';
+import Icon from '@/Components/Icon.vue';
 
 const page = usePage()
 const flashSuccess = computed(() => page.props.flash.success)
@@ -24,11 +37,3 @@ const user = computed(
     () => page.props.user
 )
 </script>
-
-
-<style scoped>
-.success {
-    background-color: green;
-    color: white;
-}
-</style>

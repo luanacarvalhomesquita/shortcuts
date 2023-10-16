@@ -19,9 +19,9 @@ class IndexController extends Controller
             return redirect()->route('login');
         }
 
-        $page = $request->input('page', 1);
-        $pageSize = $request->input('pageSize', 10);
-
+        $page = $request->input('page_number', 1);
+        $pageSize = $request->input('page_size', 10);
+        
         $shortcuts = $this->shortcut->paginate($pageSize, ['*'], 'page', $page);
 
         return Inertia(PagesVue::PAGE_INDEX, ['shortcuts' => $shortcuts]);

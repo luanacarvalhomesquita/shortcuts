@@ -31,4 +31,11 @@ export default {
     height: 50vh;
     margin: 1rem;
 }
+.icon-sm {
+    width: 1.3rem;
+}
+
+.icon-button {
+    width: 20px;
+}
 </style>

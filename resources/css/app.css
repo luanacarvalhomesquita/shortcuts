@@ -22,4 +22,8 @@
     .btn-secondary{
         @apply bg-secondary_100 dark:bg-black hover:bg-white dark:hover:bg-gray-900 text-secondary dark:text-white font-medium p-2 rounded-sm border border-secondary_300 dark:border-secondary_100 shadow
     }
+
+    .success {
+        @apply mb-4 border rounded-md shadow-sm border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-900 p-4
+    }
 }

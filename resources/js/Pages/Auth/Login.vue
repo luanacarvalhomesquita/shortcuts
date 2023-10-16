@@ -33,7 +33,6 @@
 </div>
 </template>
 
-
 <script setup>
 import { Link, useForm } from '@inertiajs/vue3'
 
@@ -50,6 +49,9 @@ import LoginLayout from '@/Layouts/LoginLayout.vue'
 
 export default {
     layout: LoginLayout,
+    mounted() {
+        document.title = 'Login - Atalhos';
+    }
 }
 </script>
 
