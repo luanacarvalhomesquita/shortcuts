@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\ShortcutController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,5 @@ Route::get('login', [AuthController::class, 'create'])->name('login');
 Route::post('login', [AuthController::class, 'store'])->name('login.store');
 
 Route::delete('logout', [AuthController::class, 'destroy'])->name('logout')->middleware('auth');
+Route::get('shortcut/{shortcut}', ShortcutController::class)->name('shortcut.show')->middleware('auth');
+

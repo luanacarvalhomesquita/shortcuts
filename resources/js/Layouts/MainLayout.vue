@@ -7,16 +7,16 @@
         <div class="flex">
             <Link href="/logout" method="DELETE" as="button" class="flex items-center">
                 <span class="pr-2 text-xs underline text-secondary_100">Sair</span>
-                <Icon className="icon-sm" imagePath="/icons/logout.svg" altName="Icone Presentation" />
+                <img src="/icons/logout.svg" alt="Icone Presentation" class="icon-sm"/>
             </Link>
         </div>
     </header>
 
-    <main class="container mx-auto p-4 w-full shadow shadow-secondary_300 h-screen my-4">
+    <main class="container shadow shadow-secondary_300 mx-auto p-4 w-full h-full min-h-screen my-4">
         <div v-if="flashSuccess" class="success">
             {{ flashSuccess }}
         </div>
-        <div class="flex py-5 " v-if="user">
+        <div class="flex py-5 " v-if="user && isMain">
             <span>Olá, {{ user.name }}! Que tal pegar um atalho hoje? :)</span>
         </div>
 
@@ -29,7 +29,10 @@
 <script setup>
 import { Link, usePage } from '@inertiajs/vue3'
 import { computed } from 'vue';
-import Icon from '@/Components/Icon.vue';
+
+const props = defineProps({
+    isMain: Boolean ?? true,
+})
 
 const page = usePage()
 const flashSuccess = computed(() => page.props.flash.success)

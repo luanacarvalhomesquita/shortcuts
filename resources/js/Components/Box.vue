@@ -6,15 +6,21 @@
         </div>
         <div class="shortcut-actions lg:w-2/3 sm:w-full text-md ml-2">
             <div class="h-1/2">
-                <h3>{{ item.title }}</h3>
+                <h3 class="sm:text-sm">{{ item.title }}</h3>
             </div>
             <div class="h-1/2 flex justify-between items-center">
-                <Link :href="item.link" class="w-1/2 bg-primary shadow shadow-secondary_300 p-1 mr-1 h-full flex items-center justify-center rounded-sm">
-                    <Icon className="icon-button" imagePath="/icons/go_to.svg" altName="Ir para" />
-                </Link>
-                <Link :href="`/shortcut/${item.id}`" class="w-1/2 shadow shadow-secondary_300 p-1 h-full flex items-center justify-center rounded-sm ">
-                    <Icon className="icon-button" imagePath="/icons/note.svg" altName="Ver notas" />
-                </Link>
+                <a :href="item.link" target="_blank" class="w-1/2 bg-primary shadow shadow-secondary_300 p-1 mr-1 h-full flex items-center justify-center rounded-sm">
+                    <div class="flex justify-center items-center">
+                        <span class="flex p-2 justify-center items-center text-secondary_100 text-sm sm:hidden">Ir para</span>
+                        <img src="/icons/go_to.svg" alt="Ir para" class="icon-button"/>
+                    </div>
+                </a>
+                <a :href="`/shortcut/${item.id}`" class="w-1/2 shadow shadow-secondary_300 p-1 h-full flex items-center justify-center rounded-sm cursor-pointer hover:shadow-secondary_600">
+                    <div class="flex justify-center items-center">
+                        <span class="flex p-2 justify-center items-center text-sm sm:hidden">Ver notas</span>
+                        <img src="/icons/note.svg" alt="Ver notas" class="icon-button"/>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
@@ -23,10 +29,7 @@
 
 
 <script>
-import { Link } from '@inertiajs/vue3';
-import Icon from './Icon.vue';
 export default {
-  components: { Icon, Link },
     props: {
         imagePath: {
             type: String,
@@ -48,8 +51,8 @@ export default {
 };
 </script>
 
-<style scoped>
-.shortcut-img {
-
+<style coped>
+.icon-button {
+    width: 20px;
 }
 </style>

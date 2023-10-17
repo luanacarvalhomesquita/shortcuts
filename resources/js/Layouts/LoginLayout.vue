@@ -3,7 +3,7 @@
         <div class="lg:w-4/6 w-2/4 bg-white dark:bg-gray-800 flex items-center justify-center h-screen lg:p-10 p-0">
             <div>
                 <h1 class="text-center title-logo text-secondary dark:text-secondary_100 lg:p-10 p-0">ATALHOS</h1>
-                <Icon className="icon-presentation" imagePath="/icons/presentation.svg" altName="Icone Presentation" />
+                <img src="/icons/presentation.svg" alt="Icone Presentation" class="icon-presentation"/>
             </div>
         </div>
         <div class="lg:w-2/6 w-2/4 bg-secondary_100 dark:bg-black flex items-center justify-center h-screen p-10">
@@ -12,15 +12,16 @@
     </div>
 </template>
 
-<script setup>
-import Icon from '@/Components/Icon.vue';
+<style scoped>
 
-</script>
-
-<style>
 .title-logo {
     font-size: 2.5rem;
     margin: 1rem;
 }
-</style>
 
+.icon-presentation {
+    width: 80vh;
+    height: 50vh;
+    margin: 1rem;
+}
+</style>
