@@ -19,11 +19,18 @@ class IndexController extends Controller
             return redirect()->route('login');
         }
 
-        $page = $request->input('page_number', 1);
-        $pageSize = $request->input('page_size', 10);
-        
-        $shortcuts = $this->shortcut->paginate($pageSize, ['*'], 'page', $page);
+        $userId = $request->user()->id;
 
-        return Inertia(PagesVue::PAGE_INDEX, ['shortcuts' => $shortcuts]);
+        $shortcuts = $this->shortcut->filterShortcuts($userId, $request);
+
+
+        return Inertia(PagesVue::PAGE_INDEX, [
+            'shortcuts' => $shortcuts,
+            'filters' => $request->all([
+                'text_filter',
+                'page_size',
+                'page_number',
+            ]),
+        ]);
     }
 }

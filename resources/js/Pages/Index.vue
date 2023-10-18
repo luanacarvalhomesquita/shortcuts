@@ -41,13 +41,14 @@ import Box from '@/Components/Box.vue';
 import MainLayout from '@/Layouts/MainLayout.vue'
 
 const props = defineProps({
-    shortcuts: Object
+    shortcuts: Object,
+    filters: Object,
 })
 
 const form = useForm({
-    text_filter: null,
-    page_size: 10,
-    page_number: 1,
+    text_filter: props.filters.text_filter ?? null,
+    page_size: props.filters.page_size ?? 10,
+    page_number: props.filters.page_number ?? 1,
 })
 
 const filter = () => form.get('/')

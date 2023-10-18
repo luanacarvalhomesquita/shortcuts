@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class Shortcut extends Model
 {
@@ -21,12 +22,22 @@ class Shortcut extends Model
         'image' => 'binary',
     ];
 
-    public function getImageUrlAttribute()
+    public function filterShortcuts(int $userId, Request $request)
     {
-        if ($this->image) {
-            return route('image.show', ['path' => $this->image]);
+        $pageNumber = $request->input('page_number', 1);
+        $pageSize = $request->input('page_size', 10);
+
+        $query = $this->query();
+
+        $textFilter = $request->input('text_filter');
+        if($textFilter) {
+            $query->where('title', 'like', "%$textFilter%");
+            $query->where('note', 'like', "%$textFilter%");
         }
 
-        return null;
+
+        return $query->paginate($pageSize, ['*'], 'page', $pageNumber);
     }
+    
+
 }
