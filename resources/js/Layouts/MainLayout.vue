@@ -1,12 +1,11 @@
 <template>
-    <header class="bg-primary dark:bg-gray-800 p-1 justify-between flex">
+    <header class="bg-primary dark:bg-gray-800 p-1 justify-between flex px-4">
         <div></div>
         <div>
             <Link class="text-lg text-secondary_100" href="/">ATALHOS</Link>
         </div>
         <div class="flex">
             <Link href="/logout" method="DELETE" as="button" class="flex items-center">
-                <span class="pr-2 text-xs underline text-secondary_100">Sair</span>
                 <img src="/icons/logout.svg" alt="Icone Presentation" class="icon-sm"/>
             </Link>
         </div>

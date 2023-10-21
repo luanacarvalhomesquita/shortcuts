@@ -8,7 +8,7 @@
     }
 
     .input {
-        @apply block w-full p-2 rounded-sm shadow-sm bg-primary_100 dark:bg-secondary border border-primary_300 dark:border-secondary_100 text-secondary dark:text-secondary_100
+        @apply block w-full rounded-l-md shadow-sm bg-primary_100 dark:bg-secondary border border-primary_300 dark:border-secondary_100 text-black dark:text-secondary_100
     }
 
     .btn-primary {

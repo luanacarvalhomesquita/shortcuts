@@ -1,8 +1,9 @@
 <template>
     <MainLayout title="Atalho - Creating" :isMain="false">
         <div class="flex cursor-pointer">
-            <img src="/icons/back.svg" alt="Back" class="icon-button pr-2"/>
-            <button class="underline text-sm py-2 text-secondary_600" @click="goBack" type="button">Voltar</button>
+            <button class="underline text-sm py-2 text-secondary_600" @click="goBack" type="button">
+                <img src="/icons/back.svg" alt="Back" class="icon-button pr-2"/>
+            </button>
         </div>
         <div>
             <form @submit.prevent="create">
