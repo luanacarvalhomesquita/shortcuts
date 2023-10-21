@@ -54,7 +54,6 @@
                 </div>
             </a>
         </div>
-
     </MainLayout>
 </template>
 
@@ -74,7 +73,7 @@ const form = useForm({
     page_number: props.filters.page_number ?? 1,
 })
 
-const filter = () => form.get('/')
+const filter = () => form.get('/shortcut')
 
 const clear = () => {
     form.text_filter = ''

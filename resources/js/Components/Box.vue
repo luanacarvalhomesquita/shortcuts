@@ -1,14 +1,14 @@
 <template>
-<div class="my-1 lg:w-1/4 md:w-1/3 sm:w-full">
+<div class="my-1 lg:w-1/4 md:w-1/2 sm:w-full">
     <div class="flex p-4 shadow-sm shadow-secondary_300 m-2">
         <div class="shortcut-img lg:w-1/3 sm:w-full">
             <img :src="imagePath" :alt="altName" class="w-full h-full object-cover rounded-sm"/>
         </div>
         <div class="shortcut-actions lg:w-2/3 sm:w-full text-md ml-2">
-            <div class="h-1/2">
-                <h3 class="sm:text-sm">{{ item.title }}</h3>
+            <div class="h-3/4">
+                <h3 class="sm:text-md hyphenate">{{ item.title.toUpperCase() }}</h3>
             </div>
-            <div class="h-1/2 flex justify-between items-center">
+            <div class="h-1/4 flex justify-between items-center">
                 <a :href="item.link" target="_blank" class="w-1/2 bg-primary shadow shadow-secondary_300 p-1 mr-1 h-full flex items-center justify-center rounded-sm">
                     <div class="flex justify-center items-center">
                         <span class="flex p-2 justify-center items-center text-secondary_100 text-sm sm:hidden">Ir para</span>
@@ -53,6 +53,7 @@ export default {
 
 <style coped>
 .icon-button {
-    width: 20px;
+    width: 10px;
+    height: 20px;
 }
 </style>

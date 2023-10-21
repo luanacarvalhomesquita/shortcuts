@@ -1,6 +1,6 @@
 <template>
     <MainLayout :title="`Atalho - ${shortcut.title}`" :isMain="false">
-        <a href="/" class="flex cursor-pointer">
+        <a href="/" class="flex cursor-pointer items-center">
             <img src="/icons/back.svg" alt="IR PARA O SITE" class="icon-button pr-2"/>
             <span class="underline text-sm py-2 text-secondary_600">Voltar</span>
         </a>
@@ -9,7 +9,7 @@
                 <h1>Atalhos > Descrição</h1>
             </div>
             <div class="flex p-4 bg-secondary_100 dark:bg-gray-800 text-xl font-medium">
-                <h3>{{ shortcut.title }}</h3>
+                <h3>{{ shortcut.title.toUpperCase() }}</h3>
             </div>
             <div class="flex py-5">
                 <div class="w-4/6 px-2">
