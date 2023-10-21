@@ -1,6 +1,6 @@
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
-import MainLayout from './Layouts/MainLayout.vue'
+import {Vue3TailwindPagination} from "vue-3-tailwind-css-pagination";
 import '../css/app.css'
 
 createInertiaApp({
@@ -10,8 +10,9 @@ createInertiaApp({
     return pages[`./Pages/${name}.vue`]
   },
   setup({ el, App, props, plugin }) {
-    createApp({ render: () => h(App, props) })
-      .use(plugin)
-      .mount(el)
-  },
+    const app = createApp({ render: () => h(App, props) });
+        app.component('Vue3TailwindPagination', Vue3TailwindPagination);
+        app.use(plugin);
+        app.mount(el);
+    },
 })

@@ -6,13 +6,13 @@
             </div>
 
             <div class="col-span-2 lg:col-span-1">
-                <button class="btn-primary  mt-5 items-center block w-full " type="submit">
-                <div class="flex pt-1">
-                    <div class="flex justify-center items-center">
-                        <img src="/icons/search.svg" alt="Search" class="icon-sm"/>
+                <button class="btn-primary mt-5 items-center block w-full " type="submit">
+                    <div class="flex pt-1">
+                        <div class="flex justify-center items-center">
+                            <img src="/icons/search.svg" alt="Search" class="icon-sm"/>
+                        </div>
+                        <span class="pl-2 text-sm text-secondary_100 dark:text-secondary">Procurar</span>
                     </div>
-                    <span class="pl-2 text-sm text-secondary_100 dark:text-secondary">Procurar</span>
-                </div>
                 </button>
             </div>
             <div v-if="form.text_filter" class="cursor-pointer">
@@ -32,6 +32,29 @@
                 title="item.title"
             />
         </div>
+        <div class="mt-10 bottom-0 mb-2 shadow-sm shadow-secondary_300 p-2 flex justify-center">
+            <vue3-tailwind-pagination
+                :total="shortcuts.total"
+                :per_page="shortcuts.per_page"
+                :current_page="shortcuts.current_page"
+                :prev_text="'&laquo; Previous'"
+                :next_text="'Next &raquo;'"
+                @change="change"
+                color="text-secondary"
+                active_background="bg-primary_600"
+            />
+        </div>
+
+        <div class="fixed bottom-0 left-2 right-2 flex justify-end items-end p-4">
+            <a href="/shortcut/create" method="GET" class="btn-primary items-center block rounded-full p-4 cursor-pointer" type="submit">
+                <div class="flex">
+                    <div class="flex justify-center items-center">
+                        <img src="/icons/new.svg" alt="Search" class="h-8"/>
+                    </div>
+                </div>
+            </a>
+        </div>
+
     </MainLayout>
 </template>
 
@@ -47,7 +70,7 @@ const props = defineProps({
 
 const form = useForm({
     text_filter: props.filters.text_filter ?? null,
-    page_size: props.filters.page_size ?? 10,
+    page_size: props.filters.page_size ?? 12,
     page_number: props.filters.page_number ?? 1,
 })
 
@@ -57,4 +80,10 @@ const clear = () => {
     form.text_filter = ''
     filter();
 }
+
+const change = (pageNumber) => {
+  form.page_number = pageNumber;
+  filter();
+};
+
 </script>

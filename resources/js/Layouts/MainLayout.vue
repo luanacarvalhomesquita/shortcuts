@@ -32,6 +32,7 @@ import { computed } from 'vue';
 
 const props = defineProps({
     isMain: Boolean ?? true,
+    title: String
 })
 
 const page = usePage()

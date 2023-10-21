@@ -14,12 +14,7 @@ class Shortcut extends Model
         'title',
         'note',
         'link',
-        'mime',
-        'file',
-    ];
-
-    protected $casts = [
-        'image' => 'binary',
+        'image',
     ];
 
     public function filterShortcuts(int $userId, Request $request)
@@ -38,6 +33,6 @@ class Shortcut extends Model
 
         return $query->paginate($pageSize, ['*'], 'page', $pageNumber);
     }
-    
+
 
 }

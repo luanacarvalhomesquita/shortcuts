@@ -1,9 +1,9 @@
 <template>
     <MainLayout :title="`Atalho - ${shortcut.title}`" :isMain="false">
-        <div class="flex cursor-pointer">
+        <a href="/" class="flex cursor-pointer">
             <img src="/icons/back.svg" alt="IR PARA O SITE" class="icon-button pr-2"/>
-            <button class="underline text-sm py-2 text-secondary_600" @click="goBack" type="button">Voltar</button>
-        </div>
+            <span class="underline text-sm py-2 text-secondary_600">Voltar</span>
+        </a>
         <div>
             <div class="flex text-2xl py-8">
                 <h1>Atalhos > Descrição</h1>
