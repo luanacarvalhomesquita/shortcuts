@@ -20,7 +20,7 @@ class Shortcut extends Model
     public function filterShortcuts(int $userId, Request $request)
     {
         $pageNumber = $request->input('page_number', 1);
-        $pageSize = $request->input('page_size', 10);
+        $pageSize = $request->input('page_size', 12);
 
         $query = $this->query();
 

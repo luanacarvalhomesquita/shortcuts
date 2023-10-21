@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\PagesVue;
 use App\Models\Shortcut;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
@@ -13,24 +11,12 @@ class IndexController extends Controller
     {
     }
 
-    public function __invoke(Request $request)
+    public function __invoke()
     {
         if(!Auth::check()) {
             return redirect()->route('login');
         }
 
-        $userId = $request->user()->id;
-
-        $shortcuts = $this->shortcut->filterShortcuts($userId, $request);
-
-
-        return Inertia(PagesVue::PAGE_INDEX, [
-            'shortcuts' => $shortcuts,
-            'filters' => $request->all([
-                'text_filter',
-                'page_size',
-                'page_number',
-            ]),
-        ]);
+        return redirect()->route('shortcut.index');
     }
 }
