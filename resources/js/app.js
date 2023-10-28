@@ -3,11 +3,12 @@ import { createInertiaApp } from '@inertiajs/vue3'
 import {Vue3TailwindPagination} from "vue-3-tailwind-css-pagination";
 import '../css/app.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faTrashAlt, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt, faPenToSquare, faTrashRestore } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(faTrashAlt)
 library.add(faPenToSquare)
+library.add(faTrashRestore)
 
 
 createInertiaApp({

@@ -21,4 +21,6 @@ Route::get('login', [AuthController::class, 'create'])->name('login');
 Route::post('login', [AuthController::class, 'store'])->name('login.store');
 
 Route::delete('logout', [AuthController::class, 'destroy'])->name('logout')->middleware('auth');
-Route::resource('shortcut', ShortcutController::class)->middleware('auth');
+Route::resource('shortcut', ShortcutController::class)->withTrashed()->middleware('auth');
+Route::put('shortcut/{shortcut}/restore', [ShortcutController::class, 'restore'])->name('shortcut.restore')->middleware('auth');
+

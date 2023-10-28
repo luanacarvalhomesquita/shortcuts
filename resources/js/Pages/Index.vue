@@ -6,7 +6,7 @@
             </div>
 
             <div class="col-span-1 lg:col-span-1 justify-center flex items-center">
-                <button class="btn-primary justify-center flex items-center w-full" type="submit">
+                <button class="btn-primary dark:bg-black justify-center flex items-center w-full" type="submit">
                     <div class="flex pt-1">
                         <div class="flex justify-center items-center">
                             <img src="/icons/search.svg" alt="Search" class="icon-sm"/>

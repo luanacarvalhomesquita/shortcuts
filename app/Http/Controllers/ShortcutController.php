@@ -19,7 +19,6 @@ class ShortcutController extends Controller
 
         $shortcuts = $this->shortcut->filterShortcuts($userId, $request);
 
-
         return Inertia(PagesVue::PAGE_INDEX, [
             'shortcuts' => $shortcuts,
             'filters' => $request->all([
@@ -44,5 +43,23 @@ class ShortcutController extends Controller
     {
         $createdShortcut = $this->shortcut->create($request->all());
         return Inertia(PagesVue::PAGE_SHORTCUT_SHOW, ['shortcut' => $createdShortcut])->with('success', 'Criado com sucesso!');
+    }
+
+    public function destroy(int $id)
+    {
+        $this->shortcut->destroy($id);
+
+        return response()->json(status: 204);
+    }
+
+    public function restore($id)
+    {
+        $shortcut = Shortcut::withTrashed()->find($id);
+
+        if ($shortcut) {
+            $shortcut->restore();
+        }
+
+        return response()->json(status: 204);
     }
 }

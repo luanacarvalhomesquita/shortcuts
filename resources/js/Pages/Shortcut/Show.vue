@@ -1,23 +1,31 @@
 <template>
     <MainLayout :title="`Atalho - ${shortcut.title}`" :isMain="false">
-        <div>
-
-            <!-- Ícone de Edição (Pencil) -->
-            <div class="h-5 w-5 text-gray-500 hover:text-gray-700 cursor-pointer" @click="edit(shortcut.id)" >
-                <font-awesome-icon icon="pen-to-square" />
+        <div class="flex justify-between">
+            <div>
+                <a href="/" class="flex cursor-pointer items-center">
+                    <span class="underline text-sm py-2 text-secondary_600">
+                        <img src="/icons/back.svg" alt="IR PARA O SITE" class="icon-button pr-2"/>
+                    </span>
+                </a>
             </div>
+            <div class="flex">
+                <!-- Ícone de Remoção (Trash) -->
+                <div v-if="!hiddenRemoveIcon" class="text-gray-500 hover:text-primary cursor-pointer p-2 hover:bg-gray-100 flex items-center justify-center rounded" @click="remove(shortcut.id)">
+                    <font-awesome-icon icon="trash-alt" />
+                    <span class="pl-2">Remover</span>
 
-            <!-- Ícone de Remoção (Trash) -->
-            <div class="h-5 w-5 text-red-500 hover:text-red-700 cursor-pointer" @click="remove(shortcut.id)">
-                <font-awesome-icon icon="trash-alt" />
+                </div>
+                <div v-else class=" text-gray-500 hover:text-primary cursor-pointer p-2 hover:bg-gray-100 flex items-center justify-center rounded" @click="restore(shortcut.id)">
+                    <font-awesome-icon icon="trash-restore" />
+                    <span class="pl-2">Restaurar</span>
+                </div>
+                <!-- Ícone de Edição (Pencil) -->
+                <div class=" text-gray-500 hover:text-primary cursor-pointer p-2 hover:bg-gray-100 flex items-center justify-center rounded" @click="edit(shortcut.id)" >
+                    <font-awesome-icon icon="pen-to-square" />
+                    <span class="pl-2">Editar</span>
+                </div>
             </div>
-
         </div>
-        <a href="/" class="flex cursor-pointer items-center">
-            <span class="underline text-sm py-2 text-secondary_600">
-                <img src="/icons/back.svg" alt="IR PARA O SITE" class="icon-button pr-2"/>
-            </span>
-        </a>
         <div>
             <div class="flex text-2xl py-8">
                 <h1>Atalhos > Descrição</h1>
@@ -51,13 +59,42 @@
 
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue'
+import axios from 'axios';
+import { computed, ref } from 'vue';
 
 const props = defineProps({
   shortcut: Object
 })
 
+// Remove
+const wasDestroyed = ref(props.shortcut.deleted_at != null ? true : false)
+const hiddenRemoveIcon = computed(() => wasDestroyed.value);
+
+const remove = (id) => {
+    let message = "Tem certeza que você quer remover este item?";
+    if (window.confirm(message)) {
+        axios.delete(`/shortcut/${id}`)
+            .then(wasDestroyed.value = true)
+            .catch(error => {
+                alert(error);
+
+            });
+    }
+};
+const restore = (id) => {
+    let message = "Tem certeza que você quer restaurar este item?";
+    if (window.confirm(message)) {
+        axios.put(`/shortcut/${id}/restore`)
+            .then(wasDestroyed.value = false)
+            .catch(error => {
+                alert(error);
+
+            });
+    }
+};
+
+// Edit
 const edit = (id) => 'oi';
-const remove = (id) => 'oi';
 
 
 </script>
