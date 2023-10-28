@@ -1,5 +1,18 @@
 <template>
     <MainLayout :title="`Atalho - ${shortcut.title}`" :isMain="false">
+        <div>
+
+            <!-- Ícone de Edição (Pencil) -->
+            <div class="h-5 w-5 text-gray-500 hover:text-gray-700 cursor-pointer" @click="edit(shortcut.id)" >
+                <font-awesome-icon icon="pen-to-square" />
+            </div>
+
+            <!-- Ícone de Remoção (Trash) -->
+            <div class="h-5 w-5 text-red-500 hover:text-red-700 cursor-pointer" @click="remove(shortcut.id)">
+                <font-awesome-icon icon="trash-alt" />
+            </div>
+
+        </div>
         <a href="/" class="flex cursor-pointer items-center">
             <span class="underline text-sm py-2 text-secondary_600">
                 <img src="/icons/back.svg" alt="IR PARA O SITE" class="icon-button pr-2"/>
@@ -42,7 +55,10 @@ import MainLayout from '@/Layouts/MainLayout.vue'
 const props = defineProps({
   shortcut: Object
 })
-const goBack = () => window.history.back();
+
+const edit = (id) => 'oi';
+const remove = (id) => 'oi';
+
 
 </script>
 
