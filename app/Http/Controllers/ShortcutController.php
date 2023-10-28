@@ -52,7 +52,7 @@ class ShortcutController extends Controller
         return response()->json(status: 204);
     }
 
-    public function restore($id)
+    public function restore(int $id)
     {
         $shortcut = Shortcut::withTrashed()->find($id);
 
@@ -61,5 +61,25 @@ class ShortcutController extends Controller
         }
 
         return response()->json(status: 204);
+    }
+
+    public function edit(int $id)
+    {
+        $shortcut = Shortcut::find($id);
+
+        return Inertia(PagesVue::PAGE_SHORTCUT_EDIT, ['shortcut' => $shortcut]);
+    }
+
+    public function update(Request $request, Shortcut $shortcut)
+    {
+        $validatedData = $request->validate([
+            'title' => 'required|max:50',
+            'link' => 'nullable|url',
+            'note' => 'required|max:2000',
+        ]);
+
+        $shortcut->update($validatedData);
+
+        return Inertia(PagesVue::PAGE_SHORTCUT_SHOW, ['shortcut' => $shortcut]);
     }
 }

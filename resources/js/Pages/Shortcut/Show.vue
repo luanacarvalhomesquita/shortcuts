@@ -9,21 +9,24 @@
                 </a>
             </div>
             <div class="flex">
-                <!-- Ícone de Remoção (Trash) -->
-                <div v-if="!hiddenRemoveIcon" class="text-gray-500 hover:text-primary cursor-pointer p-2 hover:bg-gray-100 flex items-center justify-center rounded" @click="remove(shortcut.id)">
-                    <font-awesome-icon icon="trash-alt" />
-                    <span class="pl-2">Remover</span>
-
+                <div v-if="!hiddenRemoveIcon" class="flex">
+                    <!-- Ícone de Remoção (Trash) -->
+                    <div class="text-gray-500 hover:text-primary cursor-pointer p-2 hover:bg-gray-100 flex items-center justify-center rounded" @click="remove(shortcut.id)">
+                        <font-awesome-icon icon="trash-alt" />
+                        <span class="pl-2">Remover</span>
+                    </div>
+                    <!-- Ícone de Edição (Pencil) -->
+                    <div class="text-gray-500 hover:text-primary cursor-pointer p-2 hover:bg-gray-100 flex items-center justify-center rounded" @click="edit(shortcut.id)" >
+                        <font-awesome-icon icon="pen-to-square" />
+                        <span class="pl-2">Editar</span>
+                    </div>
                 </div>
-                <div v-else class=" text-gray-500 hover:text-primary cursor-pointer p-2 hover:bg-gray-100 flex items-center justify-center rounded" @click="restore(shortcut.id)">
+                <!-- Icone Restauração -->
+                <div v-else class="text-gray-500 hover:text-primary cursor-pointer p-2 hover:bg-gray-100 flex items-center justify-center rounded" @click="restore(shortcut.id)">
                     <font-awesome-icon icon="trash-restore" />
                     <span class="pl-2">Restaurar</span>
                 </div>
-                <!-- Ícone de Edição (Pencil) -->
-                <div class=" text-gray-500 hover:text-primary cursor-pointer p-2 hover:bg-gray-100 flex items-center justify-center rounded" @click="edit(shortcut.id)" >
-                    <font-awesome-icon icon="pen-to-square" />
-                    <span class="pl-2">Editar</span>
-                </div>
+
             </div>
         </div>
         <div>
@@ -59,6 +62,7 @@
 
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue'
+import { router } from '@inertiajs/vue3';
 import axios from 'axios';
 import { computed, ref } from 'vue';
 
@@ -81,6 +85,8 @@ const remove = (id) => {
             });
     }
 };
+
+// Restore
 const restore = (id) => {
     let message = "Tem certeza que você quer restaurar este item?";
     if (window.confirm(message)) {
@@ -94,8 +100,7 @@ const restore = (id) => {
 };
 
 // Edit
-const edit = (id) => 'oi';
-
+const edit = (id) => router.get(`/shortcut/${id}/edit`);
 
 </script>
 
