@@ -53,15 +53,14 @@
                 </div>
                 <!-- image -->
                 <div class="mb-4">
-                    <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Imagem:</label>
+                    <label for="color" class="block text-gray-700 text-sm font-bold mb-2">Cor:</label>
                     <input
-                        type="file"
-                        id="image"
-                        @change="handleImageUpload"
-                        accept="image/*"
-                        class="w-full bg-gray-200 rounded p-2"
+                        type="color"
+                        id="color"
+                        v-model="form.color"
+                        class="w-full h-10"
                     />
-                    <div class="text-red-500 text-sm">{{ form.errors.image }}</div>
+                    <div class="text-red-500 text-sm">{{ form.errors.color }}</div>
                 </div>
                 <!-- submit -->
                 <button type="submit" class="bg-primary hover:bg-primary_600 text-white font-bold py-2 px-4 rounded">Enviar</button>
@@ -85,12 +84,8 @@ const form = useForm({
     title: '',
     note: '',
     link: '',
-    image: null,
+    color: '#ffffff',
 })
-
-const handleImageUpload = (event) => {
-    form.image = event.target.files[0]
-}
 
 const create = () => form.post('/shortcut')
 </script>

@@ -41,7 +41,9 @@ class ShortcutController extends Controller
 
     public function store(CreateShortcutRequest $request)
     {
-        $createdShortcut = $this->shortcut->create($request->all());
+        $fieldsToSave = array_merge($request->all(), ['user_id' => $request->user()->id]);
+        $createdShortcut = $this->shortcut->create($fieldsToSave);
+        
         return Inertia(PagesVue::PAGE_SHORTCUT_SHOW, ['shortcut' => $createdShortcut])->with('success', 'Criado com sucesso!');
     }
 

@@ -25,7 +25,7 @@ class CreateShortcutRequest extends FormRequest
             'title' => 'required|string|max:50',
             'note' => 'required|string|max:2000',
             'link' => 'nullable|url',
-            'image' => 'nullable|image|mimes:jpeg,png,gif|max:2048', // Exemplo: aceitar apenas imagens JPEG, PNG e GIF com até 2MB.
+            'color' => ['required', 'regex:/^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/'] 
         ];
     }
 }
