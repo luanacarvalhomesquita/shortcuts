@@ -13,10 +13,12 @@ class Shortcut extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'id',
+        'user_id',
         'title',
         'note',
         'link',
-        'image',
+        'color',
         'deleted_at',
     ];
 
@@ -25,7 +27,7 @@ class Shortcut extends Model
         $pageNumber = $request->input('page_number', 1);
         $pageSize = $request->input('page_size', 12);
 
-        $query = $this->query();
+        $query = $this->query()->where('user_id', $userId);
 
         $textFilter = $request->input('text_filter');
         if($textFilter) {
@@ -33,9 +35,6 @@ class Shortcut extends Model
             $query->orWhere('note', 'like', "%$textFilter%");
         }
 
-
         return $query->paginate($pageSize, ['*'], 'page', $pageNumber);
     }
-
-
 }

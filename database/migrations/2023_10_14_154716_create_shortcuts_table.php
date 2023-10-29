@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('title');
             $table->text('note')->nullable();
             $table->string('link');
-            $table->string('image')->nullable();
+            $table->string('color');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });

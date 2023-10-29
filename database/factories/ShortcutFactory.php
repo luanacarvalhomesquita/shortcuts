@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +20,11 @@ class ShortcutFactory extends Factory
         return [
             'title' => fake()->jobTitle(),
             'note' => fake()->realText(),
-            'link' => 'https://www.google.com/'
+            'color' => fake()->hexColor(),
+            'link' => 'https://www.google.com/',
+            'user_id' => function () {
+                return User::inRandomOrder()->first()->id;
+            },
         ];
     }
 }
