@@ -6,7 +6,7 @@
             </div>
 
             <div class="col-span-1 lg:col-span-1 justify-center flex items-center">
-                <button class="btn-primary dark:bg-black justify-center flex items-center w-full" type="submit">
+                <button class="btn-primary dark:bg-gray-800 dark:hover:dark:bg-gray-700 justify-center flex items-center w-full rounded-r-sm" type="submit">
                     <div class="flex pt-1">
                         <div class="flex justify-center items-center">
                             <img src="/icons/search.svg" alt="Search" class="icon-sm"/>
@@ -20,7 +20,6 @@
                 Limpar pesquisa
             </button>
         </div>
-
         <div class="my-2 flex flex-wrap">
             <Box
                 v-for="(item, index) in shortcuts.data"
@@ -31,26 +30,19 @@
                 title="item.title"
             />
         </div>
-        <div class="mt-10 bottom-0 mb-2 shadow-sm shadow-secondary_300 p-2 flex justify-center">
-            <vue3-tailwind-pagination
-                :total="shortcuts.total"
-                :per_page="shortcuts.per_page"
-                :current_page="shortcuts.current_page"
-                :prev_text="'&laquo; Previous'"
-                :next_text="'Next &raquo;'"
-                @change="change"
-                color="text-secondary"
-                active_background="bg-primary_600"
+        <div class="flex">
+            <PaginationCustom
+                :currentPage="shortcuts.current_page"
+                :to="shortcuts.to"
+                :lastPage="shortcuts.last_page"
+                :change="change"
             />
         </div>
-
-        <div class="fixed bottom-0 left-2 right-2 flex justify-end items-end p-4">
-            <a href="/shortcut/create" method="GET" class="btn-primary items-center block rounded-full p-4 cursor-pointer" type="submit">
-                <div class="flex">
-                    <div class="flex justify-center items-center">
-                        <img src="/icons/new.svg" alt="Search" class="h-8"/>
-                    </div>
-                </div>
+        <div >
+            <a href="/shortcut/create" method="GET" class="fixed bottom-4 right-4" type="submit">
+              <div class=" bg-primary items-center rounded-full p-4 cursor-pointer dark:bg-gray-800 hover:dark:bg-gray-700 shadow shadow-gray-500">
+                <img src="/icons/new.svg" alt="Search" class="h-8"/>
+              </div>
             </a>
         </div>
     </MainLayout>
@@ -59,6 +51,7 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3'
 import Box from '@/Components/Box.vue';
+import PaginationCustom from '@/Components/PaginationCustom.vue';
 import MainLayout from '@/Layouts/MainLayout.vue'
 
 const props = defineProps({
@@ -80,8 +73,15 @@ const clear = () => {
 }
 
 const change = (pageNumber) => {
+    console.log('opa')
   form.page_number = pageNumber;
   filter();
 };
 
 </script>
+
+<style scoped>
+.infront {
+    z-index: 9999;
+}
+</style>

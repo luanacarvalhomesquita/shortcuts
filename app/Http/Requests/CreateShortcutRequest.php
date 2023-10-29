@@ -21,11 +21,18 @@ class CreateShortcutRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'title' => 'required|string|max:50',
             'note' => 'required|string|max:2000',
             'link' => 'nullable|url',
-            'color' => ['required', 'regex:/^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/'] 
+            'color' => ['nullable', 'regex:/^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/']
         ];
+
+        // Aplicar valor padrão se o campo 'color' estiver vazio
+        if (empty($this->input('color'))) {
+            $this->merge(['color' => '#FFFFFF']); // Define o valor padrão como #FFFFFF (branco)
+        }
+
+        return $rules;
     }
 }

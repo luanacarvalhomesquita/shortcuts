@@ -14,7 +14,7 @@
                         type="text"
                         id="title"
                         v-model="form.title"
-                        class="w-full bg-gray-200 rounded p-2"
+                        class="w-full input"
                         placeholder="Insira o título (até 50 caracteres)"
                         maxlength="50"
                         required
@@ -29,7 +29,7 @@
                         type="text"
                         id="link"
                         v-model="form.link"
-                        class="w-full bg-gray-200 rounded p-2"
+                        class="w-full input"
                         placeholder="Insira o link"
                         autocomplete="off"
                     />
@@ -42,7 +42,7 @@
                         id="note"
                         @input="updateNoteSize"
                         v-model="form.note"
-                        class="w-full h-96 bg-gray-200 rounded p-2 leading-8"
+                        class="w-full h-48 input leading-8"
                         placeholder="Insira a nota (até 2000 caracteres)"
                         maxlength="2000"
                         required
@@ -51,15 +51,26 @@
                     <div class="text-red-500 text-sm">{{ form.errors.note }}</div>
                     <span class="flex justify-end text-secondary_600">{{ form.note.length }} / 2000 caracteres</span>
                 </div>
-                <!-- image -->
+                <!-- color -->
                 <div class="mb-4">
                     <label for="color" class="block text-gray-700 text-sm font-bold mb-2">Cor:</label>
-                    <input
-                        type="color"
-                        id="color"
-                        v-model="form.color"
-                        class="w-full h-10"
-                    />
+
+                    <div class="flex">
+                        <input
+                            type="color"
+                            id="color"
+                            v-model="form.color"
+                            class="w-2/3 bg-gray-800 h-20 cursor-pointer"
+                        />
+                        <input
+                            type="text"
+                            id="link"
+                            v-model="form.color"
+                            class="flex w-1/3 input"
+                            placeholder="Insira o link"
+                        />
+                    </div>
+
                     <div class="text-red-500 text-sm">{{ form.errors.color }}</div>
                 </div>
                 <!-- submit -->
@@ -84,7 +95,7 @@ const form = useForm({
     title: '',
     note: '',
     link: '',
-    color: '#ffffff',
+    color: '',
 })
 
 const create = () => form.post('/shortcut')
