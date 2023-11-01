@@ -12,6 +12,8 @@ class Shortcut extends Model
     use HasFactory;
     use SoftDeletes;
 
+    const DEFAULT_COLOR = '#FFFFFF';
+
     protected $fillable = [
         'id',
         'user_id',

@@ -18,10 +18,10 @@
         </div>
 
         <!-- Buttons -->
-        <div class="w-full flex justify-end">
+        <div class="w-full flex justify-end" v-if="isMain">
             <div class="lg:w-1/6 md:w-1/2 w-full flex justify-end">
                 <div
-                    class="bg-white hover:shadow-md hover:border-primary_300 border cursor-pointer border-primary rounded-sm shadow-sm shadow-gray-300 p-1 dark:bg-gray-800 dark:hover:dark:bg-gray-700 justify-center flex items-center w-full rounded-r-sm"
+                    class="bg-white hover:shadow-md hover:border-primary_300 border cursor-pointer border-primary rounded-sm shadow-sm shadow-gray-200 p-1 dark:bg-gray-800 dark:hover:dark:bg-gray-700 justify-center flex items-center w-full rounded-r-sm"
                     @click="share"
                 >
                     <span class="mr-4 text-primary text-sm">COMPARTILHAR</span>
@@ -35,7 +35,7 @@
         </div>
 
         <!-- Welcome -->
-        <div class="flex bg-gray-100 p-4 my-4" v-if="user && isMain">
+        <div class="flex bg-gray-100 dark:bg-gray-900 dark:border dark:border-gray-800 p-4 my-4" v-if="user && isMain">
             <span>Olá, {{ user.name }}! Que tal pegar um atalho hoje? :)</span>
         </div>
 

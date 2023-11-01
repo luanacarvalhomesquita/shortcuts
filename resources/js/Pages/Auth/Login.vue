@@ -20,15 +20,15 @@
             </div>
             <div class="flex items-end justify-start h-1/3">
                 <button class="btn-primary w-1/2 mt-5" type="submit">
-                    ENTRAR
+                    <span class="inline-block w-full text-center">ENTRAR</span>
                 </button>
             </div>
         </form>
     </div>
     <div class="flex items-end w-full justify-center h-1/3">
-        <button class="btn-secondary w-full mb-5" type="submit">
-            CADASTRE-SE
-        </button>
+        <a class="border border-primary hover:border-primary_600 p-2 items-center justify-center flex w-full mb-5 cursor-pointer" type="submit" href="/register">
+            <span class="text-primary">CADASTRE-SE</span>
+        </a>
     </div>
 </div>
 </template>

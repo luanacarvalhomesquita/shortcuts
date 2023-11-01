@@ -20,23 +20,28 @@
                 Limpar pesquisa
             </button>
         </div>
-        <div class="my-2 flex flex-wrap">
-            <Box
+        <div v-if="shortcuts.total > 0">
+            <div class="my-2 flex flex-wrap">
+                <Box
                 v-for="(item, index) in shortcuts.data"
                 :key="index"
                 :item="item"
                 imagePath="/icons/image-default.png"
                 altName="Icone Presentation"
                 title="item.title"
-            />
+                />
+            </div>
+            <div class="flex">
+                <PaginationCustom
+                    :currentPage="shortcuts.current_page"
+                    :to="shortcuts.to"
+                    :lastPage="shortcuts.last_page"
+                    :change="change"
+                />
+            </div>
         </div>
-        <div class="flex">
-            <PaginationCustom
-                :currentPage="shortcuts.current_page"
-                :to="shortcuts.to"
-                :lastPage="shortcuts.last_page"
-                :change="change"
-            />
+        <div v-else class="py-5">
+            <span class="text-gray-400">Você ainda não cadastrou nenhum atalho.</span>
         </div>
         <div >
             <a href="/shortcut/create" method="GET" class="fixed bottom-4 right-4" type="submit">
@@ -56,9 +61,11 @@ import MainLayout from '@/Layouts/MainLayout.vue'
 
 const props = defineProps({
     shortcuts: Object,
-    filters: Object,
+    filters: {
+        type: Object,
+        default: () => ({})
+    }
 })
-
 const form = useForm({
     text_filter: props.filters.text_filter ?? null,
     page_size: props.filters.page_size ?? 12,
