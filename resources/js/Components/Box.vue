@@ -1,5 +1,5 @@
 <template>
-    <div class="lg:w-1/4 md:w-1/2 w-full my-2">
+    <div class="lg:w-1/4 md:w-1/2 w-full my-2 px-1">
         <div :style="{ borderColor: item.color}" class="flex p-4 shadow-sm shadow-secondary_300 border-l-8 h-full">
             <div class="shortcut-actions w-full text-md ml-2">
                 <div class="h-3/4" >

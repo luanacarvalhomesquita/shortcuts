@@ -33,24 +33,21 @@
             <div class="flex text-2xl py-8">
                 <h1>Atalhos > Descrição</h1>
             </div>
-            <div class="flex p-4 bg-secondary_100 dark:bg-gray-800 text-xl font-medium">
-                <h3>{{ shortcut.title.toUpperCase() }}</h3>
+            <h3>{{ shortcut.title.toUpperCase() }}</h3>
+            <div
+                class="flex p-1 bg-secondary_100 dark:bg-gray-800 text-xl font-medium"
+                :style="{ background: shortcut.color}"
+            >
             </div>
             <div class="flex py-5">
-                <div class="w-4/6 px-2">
+                <div class="w-full px-2">
                     <span class="text-justify flex">
                         {{ shortcut.note }}
                     </span>
                 </div>
-                <div class="w-2/6 flex">
-                    <img
-                        src="/icons/image-default.png"
-                        alt="Icone Apresentation"
-                        class="flex h-full object-cover rounded-sm max-h-96 min-h-96"
-                    />
-                </div>
+
             </div>
-            <a :href="shortcut.link" target="_blank" class="w-1/4 bg-primary shadow shadow-secondary_300 p-1 mr-1 h-full flex items-center justify-center rounded-sm">
+            <a :href="shortcut.link" target="_blank" class="lg:w-1/4 md:w-1/2 sm:w-full bg-primary shadow shadow-secondary_300 p-1 mr-1 h-full flex items-center justify-center rounded-sm">
                 <div class="flex justify-center items-center">
                     <span class="flex p-2 justify-center items-center text-md text-secondary_100">IR PARA O SITE</span>
                     <img src="/icons/go_to.svg" alt="IR PARA O SITE" class="icon-button"/>
