@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\PagesVue;
-use App\Http\Requests\CreateShortcutRequest;
+use App\Http\Requests\Shortcut\CreateShortcutRequest;
+use App\Http\Requests\Shortcut\UpdateShortcutRequest;
 use Illuminate\Http\Request;
 use App\Models\Shortcut;
 
@@ -36,27 +37,27 @@ class ShortcutController extends Controller
 
     public function create()
     {
-        return Inertia(PagesVue::PAGE_SHORTCUT_CREATE, ['images' => []]);
+        return Inertia(PagesVue::PAGE_SHORTCUT_CREATE);
     }
 
     public function store(CreateShortcutRequest $request)
     {
         $fieldsToSave = array_merge($request->all(), ['user_id' => $request->user()->id]);
         $createdShortcut = $this->shortcut->create($fieldsToSave);
-        
+
         return Inertia(PagesVue::PAGE_SHORTCUT_SHOW, ['shortcut' => $createdShortcut])->with('success', 'Criado com sucesso!');
     }
 
-    public function destroy(int $id)
+    public function destroy(Shortcut $shortcut)
     {
-        $this->shortcut->destroy($id);
+        $this->shortcut->destroy($shortcut->id);
 
         return response()->json(status: 204);
     }
 
-    public function restore(int $id)
+    public function restore(Shortcut $shortcut)
     {
-        $shortcut = Shortcut::withTrashed()->find($id);
+        $shortcut = Shortcut::withTrashed()->find($shortcut->id);
 
         if ($shortcut) {
             $shortcut->restore();
@@ -65,22 +66,16 @@ class ShortcutController extends Controller
         return response()->json(status: 204);
     }
 
-    public function edit(int $id)
+    public function edit(Shortcut $shortcut)
     {
-        $shortcut = Shortcut::find($id);
+        $shortcut = Shortcut::find($shortcut->id);
 
         return Inertia(PagesVue::PAGE_SHORTCUT_EDIT, ['shortcut' => $shortcut]);
     }
 
-    public function update(Request $request, Shortcut $shortcut)
+    public function update(UpdateShortcutRequest $request, Shortcut $shortcut)
     {
-        $validatedData = $request->validate([
-            'title' => 'required|max:50',
-            'link' => 'nullable|url',
-            'note' => 'required|max:2000',
-        ]);
-
-        $shortcut->update($validatedData);
+        $shortcut->update($request->all());
 
         return Inertia(PagesVue::PAGE_SHORTCUT_SHOW, ['shortcut' => $shortcut]);
     }

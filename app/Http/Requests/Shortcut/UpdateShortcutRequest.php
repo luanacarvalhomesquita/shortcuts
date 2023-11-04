@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Shortcut;
 
+use App\Models\Shortcut;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateShortcutRequest extends FormRequest
+class UpdateShortcutRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +25,12 @@ class CreateShortcutRequest extends FormRequest
         $rules = [
             'title' => 'required|string|max:50',
             'note' => 'required|string|max:2000',
-            'link' => 'nullable|url',
+            'link' => 'required|url',
             'color' => ['nullable', 'regex:/^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/']
         ];
 
-        // Aplicar valor padrão se o campo 'color' estiver vazio
         if (empty($this->input('color'))) {
-            $this->merge(['color' => '#FFFFFF']); // Define o valor padrão como #FFFFFF (branco)
+            $this->merge(['color' => Shortcut::DEFAULT_COLOR]);
         }
 
         return $rules;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\RouteName;
 use App\Models\Shortcut;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,6 +18,6 @@ class IndexController extends Controller
             return redirect()->route('login');
         }
 
-        return redirect()->route('shortcut.index');
+        return redirect()->route(RouteName::PAGE_SHORTCUT_INDEX);
     }
 }

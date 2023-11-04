@@ -6,7 +6,7 @@
                     <h3 class="sm:text-2xl lg:text-sm md:text-sm">{{ formatTitle(item.title) }}</h3>
                 </div>
                 <div class="h-1/4 flex justify-between items-center">
-                    <a :href="item.link" target="_blank" class="w-1/2 bg-primary dark:bg-gray-800 hover:bg-gray-700 shadow shadow-secondary_300 p-4 mr-1 h-full flex items-center justify-center rounded-sm">
+                    <a :href="item.link" target="_blank" class="w-1/2 bg-primary dark:bg-gray-800 dark:hover:bg-gray-700 hover:bg-primary_600 shadow shadow-secondary_300 p-4 mr-1 h-full flex items-center justify-center rounded-sm">
                         <div class="flex justify-center items-center">
                             <span class="flex p-2 justify-center items-center text-secondary_100 text-sm sm:hidden">Ir para</span>
                             <img src="/icons/go_to.svg" alt="Ir para" class="icon-button"/>
@@ -50,8 +50,6 @@ export default {
         }
     }
 };
-
-
 </script>
 
 <style scoped>
