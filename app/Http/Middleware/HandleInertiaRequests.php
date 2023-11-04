@@ -43,7 +43,9 @@ class HandleInertiaRequests extends Middleware
             ],
             'user' => $request->user() ? [
                 'name' => $request->user()->name,
+                'hash_share' => $request->user()->hash_share,
             ] : null,
+            'base_url' => env('APP_URL'),
         ]);
     }
 }

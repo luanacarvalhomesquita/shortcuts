@@ -6,6 +6,10 @@
         </button>
     </div>
     <div>
+        <div class="mb-10 mt-10">
+            <h2>Novo Atalho</h2>
+            <hr>
+        </div>
         <form @submit.prevent="update" class="mt-6">
             <!-- title -->
             <div class="mb-4">
@@ -14,7 +18,7 @@
                 type="text"
                 id="title"
                 v-model="form.title"
-                class="w-full bg-gray-800 rounded p-2"
+                class="w-full input"
                 placeholder="Insira o título (até 50 caracteres)"
                 maxlength="50"
                 required
@@ -29,7 +33,7 @@
                     type="text"
                     id="link"
                     v-model="form.link"
-                    class="w-full bg-gray-800 rounded p-2"
+                    class="w-full input"
                     placeholder="Insira o link"
                     autocomplete="off"
                 />
@@ -42,7 +46,7 @@
                     id="note"
                     @input="updateNoteSize"
                     v-model="form.note"
-                    class="w-full h-48 bg-gray-800 rounded p-2 leading-6"
+                    class="w-full h-48 input leading-8"
                     placeholder="Insira a nota (até 2000 caracteres)"
                     maxlength="2000"
                     required
@@ -53,20 +57,19 @@
             </div>
             <!-- color -->
             <div class="mb-4">
-                <label for="color" class="block text-gray-700 text-sm font-bold mb-2">Cor:</label>
-
+                <label for="color" class="block text-gray-800 text-sm font-bold mb-2">Clique abaixo para escolher uma cor:</label>
                 <div class="flex">
                     <input
                         type="color"
                         id="color"
                         v-model="form.color"
-                        class="w-2/3 bg-gray-800 h-20 cursor-pointer"
+                        class="w-2/6 bg-gray-800 h-20 cursor-pointer shadow-sm shadow-gray-400 mr-2"
                     />
                     <input
                         type="text"
                         id="link"
                         v-model="form.color"
-                        class="flex w-1/3 input"
+                        class="flex w-4/3 input"
                         placeholder="#FFFFFF"
                     />
                 </div>
@@ -74,9 +77,14 @@
                 <div class="text-red-500 text-sm">{{ form.errors.color }}</div>
             </div>
             <!-- submit -->
-            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                Atualizar
-            </button>
+           <div class="flex justify-end mt-10">
+                <button type="submit" class="bg-primary hover:bg-primary_600 w-1/4 text-white font-bold py-2 px-4 rounded">
+                    SALVAR
+                </button>
+                <button type="submit" class="border-primary border hover:border-primary_600 w-1/4 text-primary font-bold py-2 px-4 rounded ml-2">
+                    CANCELAR
+                </button>
+            </div>
         </form>
     </div>
 </MainLayout>
@@ -95,7 +103,7 @@ const goBack = () => window.history.back();
 
 const form = useForm({
     title: props.shortcut.title,
-    note: props.shortcut.note,
+    note: props.shortcut.note ?? '',
     link: props.shortcut.link,
     color: props.shortcut.color,
 })

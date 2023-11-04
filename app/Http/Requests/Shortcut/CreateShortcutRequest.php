@@ -24,7 +24,7 @@ class CreateShortcutRequest extends FormRequest
     {
         $rules = [
             'title' => 'required|string|max:50',
-            'note' => 'required|string|max:2000',
+            'note' => 'nullable|string|max:2000',
             'link' => 'required|url',
             'color' => ['nullable', 'regex:/^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/']
         ];

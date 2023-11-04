@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\GenerateHashShare;
 use App\Helpers\PagesVue;
 use App\Helpers\RouteName;
 use App\Http\Requests\User\CreateUserRequest;
@@ -11,8 +12,10 @@ use Inertia\Inertia;
 
 class UserController extends Controller
 {
-    public function __construct(private readonly User $user)
-    {
+    public function __construct(
+        private readonly User $user,
+        private readonly GenerateHashShare $generateHashShare,
+    ) {
     }
 
     public function create()
@@ -26,6 +29,7 @@ class UserController extends Controller
             'password' => bcrypt($request->input('password')),
             'name' => $request->input('name'),
             'email' => $request->input('email'),
+            'hash_share' => $this->generateHashShare->makeSha256(),
         ]);
 
         Auth::login($user);

@@ -1,31 +1,31 @@
 <template>
-    <div v-if="lastPage !== currentPage">
+    <div v-if="!onePage">
         <ul class="flex list-reset border border-grey-light rounded w-auto font-sans">
             <li v-if="currentPage > 1">
-                <div class="cursor-pointer block hover:text-white hover:bg-blue text-blue border-r border-grey-light px-3 py-2"
-                @click="change(currentPage -1)"
+                <div class="cursor-pointer block hover:text-gray-700 dark:hover:text-white hover:bg-blue text-blue border-r border-grey-light px-3 py-2"
+                    @click="change(currentPage -1)"
                 >
-                Anterior
-            </div>
-        </li>
-        <li v-for="page in pages" :key="page" >
-            <div :class="[page == currentPage ? ' bg-primary text-white bg-blue border-r border-blue':'hover:text-white hover:bg-blue text-blue border-r border-grey-light', 'block px-3 py-2 cursor-pointer']"
-            href="#"
-            @click="change(page)"
-            >
-            {{ page }}
-        </div>
-    </li>
-    <li v-if="currentPage < lastPage">
-            <div class="cursor-pointer block hover:text-white hover:bg-blue text-blue px-3 py-2"
-               href="#"
-               @click="change(currentPage + 1)"
-            >
-                Próximo
-            </div>
-        </li>
-    </ul>
-</div>
+                    Anterior
+                </div>
+            </li>
+            <li v-for="page in pages" :key="page" >
+                <div :class="[page == currentPage ? ' bg-primary text-white bg-blue border-r border-blue':'hover:text-gray-700 dark:hover:text-white hover:bg-blue text-blue border-r border-grey-light', 'block px-3 py-2 cursor-pointer']"
+                    href="#"
+                    @click="change(page)"
+                >
+                    {{ page }}
+                </div>
+            </li>
+            <li v-if="currentPage < lastPage">
+                <div class="cursor-pointer block hover:text-gray-700 dark:hover:text-white hover:bg-blue text-blue px-3 py-2"
+                    href="#"
+                    @click="change(currentPage + 1)"
+                >
+                    Próximo
+                </div>
+            </li>
+        </ul>
+    </div>
 </template>
 
 <script setup>
@@ -50,6 +50,10 @@ const props = defineProps({
     },
     change: {
         type: Function,
+        required: true
+    },
+    onePage: {
+        type: Boolean,
         required: true
     }
 });

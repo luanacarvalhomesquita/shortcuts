@@ -5,8 +5,8 @@
             <img src="/icons/back.svg" alt="Back" class="icon-button pr-2"/>
         </button>
     </div>
-    <div class="mb-10">
-        <h2>Novo Atalho</h2>
+    <div class="mb-10 mt-5 font-medium text-secondary dark:text-white">
+        <h1>Novo Atalho</h1>
         <hr>
     </div>
     <div>
@@ -49,32 +49,29 @@
                     class="w-full h-48 input leading-8"
                     placeholder="Insira a nota (até 2000 caracteres)"
                     maxlength="2000"
-                    required
                     autocomplete="off"
                 ></textarea>
                 <div class="text-red-500 text-sm">{{ form.errors.note }}</div>
                 <span class="flex justify-end text-secondary_600">{{ form.note.length }} / 2000 caracteres</span>
             </div>
-            <!-- color -->
-            <div class="mb-4">
-                <label for="color" class="block text-gray-700 text-sm font-bold mb-2">Cor:</label>
-
+           <!-- color -->
+           <div class="mb-4">
+                <label for="color" class="block text-gray-800 text-sm font-bold mb-2">Clique abaixo para escolher uma cor:</label>
                 <div class="flex">
                     <input
                         type="color"
                         id="color"
                         v-model="form.color"
-                        class="w-2/3 bg-gray-800 h-20 cursor-pointer"
+                        class="w-2/6 bg-gray-800 h-10 cursor-pointer shadow-sm shadow-gray-400 mr-2"
                     />
                     <input
                         type="text"
                         id="link"
                         v-model="form.color"
-                        class="flex w-1/3 input"
+                        class="flex w-4/3 input"
                         placeholder="#FFFFFF"
                     />
                 </div>
-
                 <div class="text-red-500 text-sm">{{ form.errors.color }}</div>
             </div>
             <!-- submit -->

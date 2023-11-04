@@ -26,6 +26,6 @@ Route::get('register', [UserController::class, 'create']);
 Route::post('register', [UserController::class, 'store']);
 
 
-Route::resource('shortcut', ShortcutController::class)->withTrashed()->middleware('auth');
+Route::resource('shortcut', ShortcutController::class)->middleware('auth')->middleware('shortcut.owner');
 Route::put('shortcut/{shortcut}/restore', [ShortcutController::class, 'restore'])->name('shortcut.restore')->middleware('auth');
 

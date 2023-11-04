@@ -31,7 +31,7 @@
         </div>
         <div>
             <div class="flex text-2xl py-8">
-                <h1>Atalhos > Descrição</h1>
+                <h1>Descrição</h1>
             </div>
             <h3>{{ shortcut.title.toUpperCase() }}</h3>
             <div

@@ -18,16 +18,14 @@
             <div class="flex justify-end underline">
                <Link><span class="text-sm">Esqueci minha senha</span></Link>
             </div>
-            <div class="flex items-end justify-start h-1/3">
-                <button class="btn-primary w-1/2 mt-5" type="submit">
-                    <span class="inline-block w-full text-center">ENTRAR</span>
-                </button>
-            </div>
+            <button class="btn-primary justify-center inline-block w-full text-center cursor-pointer mt-5 items-end h-1/3" type="submit">
+                ENTRAR
+            </button>
         </form>
     </div>
     <div class="flex items-end w-full justify-center h-1/3">
-        <a class="border border-primary hover:border-primary_600 p-2 items-center justify-center flex w-full mb-5 cursor-pointer" type="submit" href="/register">
-            <span class="text-primary">CADASTRE-SE</span>
+        <a class="border border-primary hover:border-primary_600 p-2 items-center justify-center flex w-full mb-5 cursor-pointer text-primary" type="submit" href="/register">
+            CADASTRE-SE
         </a>
     </div>
 </div>

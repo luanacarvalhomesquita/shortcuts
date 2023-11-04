@@ -48,16 +48,16 @@ class ShortcutController extends Controller
         return Inertia(PagesVue::PAGE_SHORTCUT_SHOW, ['shortcut' => $createdShortcut])->with('success', 'Criado com sucesso!');
     }
 
-    public function destroy(int $id)
+    public function destroy(Shortcut $shortcut)
     {
-        $this->shortcut->destroy($id);
+        $this->shortcut->destroy($shortcut->id);
 
         return response()->json(status: 204);
     }
 
-    public function restore(int $id)
+    public function restore(Shortcut $shortcut)
     {
-        $shortcut = Shortcut::withTrashed()->find($id);
+        $shortcut = Shortcut::withTrashed()->find($shortcut->id);
 
         if ($shortcut) {
             $shortcut->restore();
@@ -66,9 +66,9 @@ class ShortcutController extends Controller
         return response()->json(status: 204);
     }
 
-    public function edit(int $id)
+    public function edit(Shortcut $shortcut)
     {
-        $shortcut = Shortcut::find($id);
+        $shortcut = Shortcut::find($shortcut->id);
 
         return Inertia(PagesVue::PAGE_SHORTCUT_EDIT, ['shortcut' => $shortcut]);
     }
