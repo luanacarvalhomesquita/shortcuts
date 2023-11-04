@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\PagesVue;
 use App\Http\Requests\Shortcut\CreateShortcutRequest;
+use App\Http\Requests\Shortcut\ShareShortcutRequest;
 use App\Http\Requests\Shortcut\UpdateShortcutRequest;
 use Illuminate\Http\Request;
 use App\Models\Shortcut;
@@ -78,5 +79,20 @@ class ShortcutController extends Controller
         $shortcut->update($request->all());
 
         return Inertia(PagesVue::PAGE_SHORTCUT_SHOW, ['shortcut' => $shortcut]);
+    }
+
+    public function share(ShareShortcutRequest $request)
+    {
+        $shortcuts = $this->shortcut->filterShortcutsByUserHash($request);
+
+        return Inertia(PagesVue::PAGE_SHORTCUT_SHARE, [
+            'shortcuts' => $shortcuts,
+            'filters' => $request->all([
+                'text_filter',
+                'hash',
+                'page_size',
+                'page_number',
+            ]),
+        ]);
     }
 }

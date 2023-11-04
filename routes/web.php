@@ -28,4 +28,4 @@ Route::post('register', [UserController::class, 'store']);
 
 Route::resource('shortcut', ShortcutController::class)->middleware('auth')->middleware('shortcut.owner');
 Route::put('shortcut/{shortcut}/restore', [ShortcutController::class, 'restore'])->name('shortcut.restore')->middleware('auth');
-
+Route::get('shortcut/share', [ShortcutController::class, 'share'])->name('shortcut.share');
