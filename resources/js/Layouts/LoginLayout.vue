@@ -36,7 +36,7 @@
 
     <!-- Dialog Register New User -->
     <div v-if="openModalRegister">
-        <Create :methodCloseModal="register"/>
+        <create :methodCloseModal="register"/>
     </div>
 
     <!-- Dialog Forgot Password -->
