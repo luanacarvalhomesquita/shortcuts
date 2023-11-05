@@ -1,5 +1,10 @@
 <template>
-    <div class="relative justify-center" :class="{'fixed inset-0 opacity-25 bg-gray-50' : openModalRegister}">
+    <div
+        class="relative justify-center"
+        :class="{
+            'fixed inset-0 opacity-25 bg-gray-50' : openModalRegister,
+            'fixed inset-0 opacity-25 bg-gray-50' : openModalForgotPassword
+    }">
         <!-- Show when size sm  -->
         <div class="lg:hidden md:hidden sm:flex bg-primary text-white justify-center">
             <span class="flex justify-center py-2">ATALHOS</span>
@@ -33,15 +38,32 @@
     <div v-if="openModalRegister">
         <Create :methodCloseModal="register"/>
     </div>
+
+    <!-- Dialog Forgot Password -->
+    <div v-if="openModalForgotPassword">
+        <forgot-password :methodCloseModal="changeDialogForgotPassword"/>
+    </div>
 </template>
 
 <script setup>
 
 import Create from '@/Pages/Auth/Modal/Create.vue'
+import ForgotPassword from '@/Pages/Auth/Modal/ForgotPassword.vue'
 import { ref } from 'vue'
 
-const openModalRegister = ref(false)
+const props = defineProps({
+    openModalForgotPassword: {
+        type: Boolean,
+        required: true
+    },
+    changeDialogForgotPassword: {
+        type: Function,
+        required: true
+    }
+})
 
+// New User
+const openModalRegister = ref(false)
 const register = () => {
     openModalRegister.value = !openModalRegister.value
 }
