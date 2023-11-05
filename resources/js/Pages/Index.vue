@@ -13,8 +13,8 @@
             </form>
 
             <!-- Total -->
-            <div class="py-1 my-4  border-l-2 border-primary pl-2">
-                <span class="text-gray-600 text-xs">Total: {{ shortcuts.total }} atalho(s) encontrado(s)</span>
+            <div v-if="shortcuts.total != 0" class="py-1 my-4  border-l-2 border-primary pl-2">
+                <span class="text-gray-600 text-xs"> {{ formattedTotal() }}</span>
             </div>
 
             <!-- Shorcuts -->
@@ -84,6 +84,12 @@ const change = (pageNumber) => {
   filter();
 };
 
+const formattedTotal = () => {
+    if(props.shortcuts.total > 1) {
+        return `Resultado: ${props.shortcuts.total} atalhos encontrados.`
+    }
+    return `Resultado: Apenas ${props.shortcuts.total} atalho foi encontrado.`
+}
 </script>
 
 <script>
