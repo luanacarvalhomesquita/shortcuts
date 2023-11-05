@@ -16,7 +16,7 @@
                 <Title  titleName="Meus Atalhos" />
 
                 <!-- Welcome -->
-                <div class="flex bg-gray-100 dark:bg-gray-900 dark:border dark:border-gray-800 p-4 my-4" v-if="user">
+                <div v-if="isAuth" class="flex bg-gray-100 dark:bg-gray-900 dark:border dark:border-gray-800 p-4 my-4" >
                     <span>Olá, {{ user.name }}! Que tal pegar um atalho hoje? :)</span>
                 </div>
 

@@ -8,11 +8,15 @@ use App\Http\Requests\Shortcut\ShareShortcutRequest;
 use App\Http\Requests\Shortcut\UpdateShortcutRequest;
 use Illuminate\Http\Request;
 use App\Models\Shortcut;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 
 class ShortcutController extends Controller
 {
-    public function __construct(private readonly Shortcut $shortcut)
-    {
+    public function __construct(
+        private readonly Shortcut $shortcut,
+        private readonly User $user,
+    ) {
     }
 
     public function index(Request $request)
@@ -78,7 +82,16 @@ class ShortcutController extends Controller
 
     public function share(ShareShortcutRequest $request)
     {
-        $shortcuts = $this->shortcut->filterShortcutsByUserHash($request);
+        $shortcuts = new Collection();
+        $authorName = null;
+
+        $hash = $request->input('hash');
+        $existent = $this->user::where('hash_share', $hash)->first();
+        if ($existent) {
+            $shortcuts = $this->shortcut->filterShortcutsByUserHash($request);
+            $author = $this->user->getUserByHash($hash);
+            $authorName = $author->name;
+        }
 
         return Inertia(PagesVue::PAGE_SHORTCUT_SHARE, [
             'shortcuts' => $shortcuts,
@@ -88,6 +101,7 @@ class ShortcutController extends Controller
                 'page_size',
                 'page_number',
             ]),
+            'authorName' => $authorName,
         ]);
     }
 }

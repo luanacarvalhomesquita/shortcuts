@@ -4,11 +4,9 @@
         <Menu :isAuth="isAuth"/>
     </header>
 
-    <main class="container shadow shadow-secondary_300 mx-auto p-4 w-full h-full min-h-screen">
-        <!-- Feedback -->
-        <div v-if="flashSuccess" class="success">
-            {{ flashSuccess }}
-        </div>
+    <main class="container shadow shadow-secondary_300 mx-auto p-4 w-full h-full min-h-screen my-2">
+        <!-- Title -->
+        <Title :titleName="`${authorName} compartilhou os atalhos dele com você`" />
 
         <!-- Welcome -->
         <div v-if="!isAuth" class="flex bg-gray-100 dark:bg-gray-900 dark:border dark:border-gray-800 p-4 mb-4">
@@ -20,7 +18,7 @@
         </div>
 
         <!-- Content -->
-        <div>
+        <div class="mt-4">
             <slot>Default</slot>
         </div>
     </main>
@@ -30,14 +28,16 @@
 import { usePage } from '@inertiajs/vue3'
 import { computed } from 'vue';
 import Menu from '@/Components/Menu.vue';
+import Title from '@/Components/Title.vue';
 
-const props = defineProps({
-    title: String
-});
-
+defineProps({
+    authorName: {
+        type: String,
+        default: 'Não encontrado'
+    }
+})
 const page = usePage();
-const flashSuccess = computed(() => page.props.flash.success);
-const user = computed(() =>page.props.user);
+const user = computed(() => page.props.user);
 const isAuth = user.value ? true : false;
 
 </script>

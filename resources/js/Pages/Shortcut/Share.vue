@@ -1,8 +1,8 @@
 <template>
-    <PublicLayout>
+    <PublicLayout :authorName="authorName">
         <div class="relative">
-            <!-- Filter to serach shortcuts -->
-            <form @submit.prevent="filter" class="min-w-full grid items-end grid-cols-12">
+            <!-- Filter to search shortcuts -->
+            <form @submit.prevent="filter" class="min-w-full grid items-end grid-cols-12 mb-2">
                 <div class="col-span-11 lg:col-span-11">
                     <text-field :valueText="form.text_filter" :updateValue="updateTextFilter" :clearMethod="clearFilter" />
                 </div>
@@ -13,8 +13,8 @@
             </form>
 
             <!-- Total -->
-            <div class="py-1 my-4  border-l-2 border-primary pl-2">
-                <span class="text-gray-600 text-xs">Total: {{ shortcuts.total }} atalho(s) encontrado(s)</span>
+            <div v-if="shortcuts.total != 0" class="py-1 my-4  border-l-2 border-primary pl-2">
+                <span class="text-gray-600 text-xs"> {{ formattedTotal() }}</span>
             </div>
 
             <!-- Shorcuts -->
@@ -44,13 +44,6 @@
             <div v-else class="py-5">
                 <span class="text-gray-400">Não há nenhum atalho para exibir.</span>
             </div>
-            <div >
-                <a href="/shortcut/create" method="GET" class="fixed bottom-4 right-4" type="submit">
-                <div class=" bg-primary items-center rounded-full p-4 cursor-pointer dark:bg-gray-800 hover:dark:bg-gray-700 shadow shadow-gray-500 hover:shadow-gray-700">
-                    <img src="/icons/new.svg" alt="Search" class="h-8"/>
-                </div>
-                </a>
-            </div>
         </div>
     </PublicLayout>
 </template>
@@ -64,10 +57,17 @@ import ButtonBasic from '@/Components/ButtonBasic.vue';
 import TextField from '@/Components/TextField.vue';
 
 const props = defineProps({
-    shortcuts: Object,
+    shortcuts: {
+        type: Object,
+        required: true
+    },
     filters: {
         type: Object,
         default: () => ({})
+    },
+    authorName: {
+        type: String,
+        required: true
     }
 })
 const form = useForm({
@@ -92,6 +92,13 @@ const change = (pageNumber) => {
   form.page_number = pageNumber;
   filter();
 };
+
+const formattedTotal = () => {
+    if(props.shortcuts.total > 1) {
+        return `Resultado: ${props.shortcuts.total} atalhos encontrados.`
+    }
+    return `Resultado: Apenas ${props.shortcuts.total} atalho foi encontrado.`
+}
 
 </script>
 
