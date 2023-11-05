@@ -22,9 +22,9 @@ class CreateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:100',
-            'email' => 'required|email|max:255|unique:users,email',
-            'password' => ['required', 'string', 'min:8', 'regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/'],
+            'name' => 'required|string|max:100|min:2',
+            'email' => 'required|email|max:255|min:5|unique:users,email',
+            'password' => ['required', 'string', 'confirmed', 'min:8', 'regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/'],
         ];
     }
 
@@ -35,13 +35,14 @@ class CreateUserRequest extends FormRequest
             'name.string' => 'O campo nome deve ser uma string.',
             'name.max' => 'O campo nome não pode exceder 100 caracteres.',
             'email.required' => 'O campo email é obrigatório.',
-            'email.email' => 'O campo email deve conter um endereço de email válido.',
+            'email.email' => 'Credenciais inválidas',
             'email.max' => 'O campo email não pode exceder 255 caracteres.',
-            'email.unique' => 'Este email já está em uso.',
+            'email.unique' => 'Credenciais inválidas',
             'password.required' => 'O campo senha é obrigatório.',
             'password.string' => 'O campo senha deve ser uma string.',
             'password.min' => 'A senha deve ter no mínimo 8 caracteres.',
             'password.regex' => 'A senha deve conter pelo menos uma letra e um número.',
+            'password.confirmed' => 'As senhas não coincidem.',
         ];
     }
 }

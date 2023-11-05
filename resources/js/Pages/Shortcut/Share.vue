@@ -1,26 +1,23 @@
 <template>
-    <PublicLayout title="Atalhos Compartilhados" :isMain="true">
+    <PublicLayout>
         <div class="relative">
+            <!-- Filter to serach shortcuts -->
             <form @submit.prevent="filter" class="min-w-full grid items-end grid-cols-12">
                 <div class="col-span-11 lg:col-span-11">
-                    <input type="text" id="text-filter" placeholder="O que você está procurando?" class="input w-full" v-model="form.text_filter" required/>
+                    <text-field :valueText="form.text_filter" :updateValue="updateTextFilter" :clearMethod="clearFilter" />
                 </div>
 
-                <div class="col-span-1 lg:col-span-1 justify-center flex items-center">
-                    <button class="btn-primary dark:bg-gray-800 dark:hover:dark:bg-gray-700 justify-center flex items-center w-full rounded-r-sm" type="submit">
-                        <div class="flex pt-1">
-                            <div class="flex justify-center items-center">
-                                <img src="/icons/search.svg" alt="Search" class="icon-sm"/>
-                            </div>
-                        </div>
-                    </button>
+                <div class="col-span-1 lg:col-span-1 justify-center flex items-center h-full">
+                    <button-basic iconName="search" iconAlt="Search" iconClass="icon-sm"/>
                 </div>
             </form>
-            <div v-if="form.text_filter" class="cursor-pointer">
-                <button @click="clear" class=" underline text-sm py-2 text-secondary_600">
-                    Limpar pesquisa
-                </button>
+
+            <!-- Total -->
+            <div class="py-1 my-4  border-l-2 border-primary pl-2">
+                <span class="text-gray-600 text-xs">Total: {{ shortcuts.total }} atalho(s) encontrado(s)</span>
             </div>
+
+            <!-- Shorcuts -->
             <div v-if="shortcuts.total > 0">
                 <div class="my-2 flex flex-wrap">
                     <Box
@@ -42,6 +39,8 @@
                     />
                 </div>
             </div>
+
+            <!-- When Empty-->
             <div v-else class="py-5">
                 <span class="text-gray-400">Não há nenhum atalho para exibir.</span>
             </div>
@@ -53,7 +52,6 @@
                 </a>
             </div>
         </div>
-
     </PublicLayout>
 </template>
 
@@ -62,6 +60,8 @@ import { useForm } from '@inertiajs/vue3'
 import Box from '@/Components/Box.vue';
 import PaginationCustom from '@/Components/PaginationCustom.vue';
 import PublicLayout from '@/Layouts/PublicLayout.vue'
+import ButtonBasic from '@/Components/ButtonBasic.vue';
+import TextField from '@/Components/TextField.vue';
 
 const props = defineProps({
     shortcuts: Object,
@@ -73,23 +73,34 @@ const props = defineProps({
 const form = useForm({
     hash: props.filters.hash,
     text_filter: props.filters.text_filter ?? null,
-    page_size: props.filters.page_size ?? 12,
+    page_size: props.filters.page_size ?? 16,
     page_number: props.filters.page_number ?? 1,
 })
 
-const filter = () => form.get('/shortcut')
+const filter = () => form.get('/shortcut/share')
 
-const clear = () => {
-    form.text_filter = ''
+const clearFilter = () => {
+    form.text_filter = null;
     filter();
 }
 
+const updateTextFilter = (event) => {
+    form.text_filter = event.target.value
+}
+
 const change = (pageNumber) => {
-    console.log('opa')
   form.page_number = pageNumber;
   filter();
 };
 
+</script>
+
+<script>
+export default {
+    mounted() {
+        document.title = 'Atalhos Compartilhados - Atalhos';
+    }
+}
 </script>
 
 <style scoped>

@@ -8,13 +8,13 @@
                 <div class="h-1/4 flex justify-between items-center">
                     <a :href="item.link" target="_blank" class="w-1/2 bg-primary dark:bg-gray-800 dark:hover:bg-gray-700 hover:bg-primary_600 shadow shadow-secondary_300 p-4 mr-1 h-full flex items-center justify-center rounded-sm">
                         <div class="flex justify-center items-center">
-                            <span class="flex p-2 justify-center items-center text-secondary_100 text-sm sm:hidden">Ir para</span>
+                            <span class="flex p-2 justify-center items-center text-secondary_100 text-xs sm:hidden">Ir para</span>
                             <img src="/icons/go_to.svg" alt="Ir para" class="icon-button"/>
                         </div>
                     </a>
                     <a :href="`/shortcut/${item.id}`" class="w-1/2 shadow shadow-secondary_300 p-4 h-full flex items-center justify-center rounded-sm cursor-pointer hover:shadow-secondary_600">
                         <div class="flex justify-center items-center">
-                            <span class="flex p-2 justify-center items-center text-sm sm:hidden">Ver notas</span>
+                            <span class="flex p-2 justify-center items-center text-xs sm:hidden text-primary">Sobre</span>
                             <img src="/icons/note.svg" alt="Ver notas" class="icon-button"/>
                         </div>
                     </a>

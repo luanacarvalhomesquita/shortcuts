@@ -75,7 +75,14 @@
                 <div class="text-red-500 text-sm">{{ form.errors.color }}</div>
             </div>
             <!-- submit -->
-            <button type="submit" class="bg-primary hover:bg-primary_600 text-white font-bold py-2 px-4 rounded">Enviar</button>
+            <div class="flex justify-end mt-10">
+                <button type="submit" class="bg-primary hover:bg-primary_600 w-1/4 text-white font-bold py-2 px-4 rounded">
+                    SALVAR
+                </button>
+                <button type="submit" @click="goBack" class="border-primary border hover:border-primary_600 w-1/4 text-primary font-bold py-2 px-4 rounded ml-2">
+                    CANCELAR
+                </button>
+            </div>
         </form>
     </div>
 </MainLayout>
@@ -88,7 +95,6 @@ import { useForm } from '@inertiajs/vue3';
 const props = defineProps({
     images: Object,
 })
-
 
 const goBack = () => window.history.back();
 

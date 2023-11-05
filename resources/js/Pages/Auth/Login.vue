@@ -1,38 +1,43 @@
 <template>
-<div class="w-full h-screen flex flex-col ">
-    <div class="flex items-end h-1/3 mb-5">
-        <h1 class="text-secondary  dark:text-secondary_100 title-login">Entrar</h1>
+    <!-- Error Message -->
+    <div v-if="form.errors.email" class="bg-red-100 shadow-sm rounded-sm flex p-2 w-full mb-10">
+        <div class="input-error">{{ form.errors.email }}</div>
     </div>
-    <div class="w-full flex items-center h-1/3">
+
+    <!-- Title -->
+    <Title titleName="Login" />
+
+    <!-- Form Login -->
+    <div class="w-full flex items-center">
         <form @submit.prevent="login" class="w-full">
+            <!-- Auth Fields -->
             <div class="mt-5">
                 <label for="email" class="label">Email</label>
                 <input type="text" id="email" class="input" v-model="form.email" required/>
-                <div class="input-error" v-if="form.errors.email">{{ form.errors.email }}</div>
             </div>
             <div class="mt-5">
                 <label for="password" class="label">Senha</label>
                 <input type="password" id="password" class="input" v-model="form.password" required/>
-                <div class="input-error" v-if="form.errors.password">{{ form.errors.password }}</div>
             </div>
+
+            <!-- Forgot password -->
             <div class="flex justify-end underline">
-               <Link><span class="text-sm">Esqueci minha senha</span></Link>
+                <div @click="changeDialogForgotPassword" class="cursor-pointer ">
+                    <span class="text-xs text-red-400 hover:text-red-500">Esqueci minha senha</span>
+                </div>
             </div>
+
+            <!-- Button Login -->
             <button class="btn-primary justify-center inline-block w-full text-center cursor-pointer mt-5 items-end h-1/3" type="submit">
                 ENTRAR
             </button>
         </form>
     </div>
-    <div class="flex items-end w-full justify-center h-1/3">
-        <a class="border border-primary hover:border-primary_600 p-2 items-center justify-center flex w-full mb-5 cursor-pointer text-primary" type="submit" href="/register">
-            CADASTRE-SE
-        </a>
-    </div>
-</div>
 </template>
 
 <script setup>
 import { Link, useForm } from '@inertiajs/vue3'
+import Title from '@/Components/Title.vue'
 
 const form = useForm({
     email: null,
@@ -40,15 +45,19 @@ const form = useForm({
 })
 
 const login = () => form.post('/login')
+
+const isOpenDialogForgotPassword = ref(false)
+const changeDialogForgotPassword = () => !isOpenDialogForgotPassword.value
 </script>
 
 <script>
 import LoginLayout from '@/Layouts/LoginLayout.vue'
+import { ref } from 'vue'
 
 export default {
     layout: LoginLayout,
     mounted() {
-        document.title = 'Login - Atalhos';
+        document.title = 'Entrar - Atalhos';
     }
 }
 </script>

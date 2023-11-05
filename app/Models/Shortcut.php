@@ -28,7 +28,7 @@ class Shortcut extends Model
     public function filterShortcuts(int $userId, Request $request)
     {
         $pageNumber = $request->input('page_number', 1);
-        $pageSize = $request->input('page_size', 12);
+        $pageSize = $request->input('page_size', 16);
 
         $query = $this->query()->where('user_id', $userId);
 
@@ -44,7 +44,7 @@ class Shortcut extends Model
     public function filterShortcutsByUserHash(ShareShortcutRequest $request)
     {
         $pageNumber = $request->input('page_number', 1);
-        $pageSize = $request->input('page_size', 12);
+        $pageSize = $request->input('page_size', 16);
         $hash = $request->input('hash');
 
         $query = $this->query()
