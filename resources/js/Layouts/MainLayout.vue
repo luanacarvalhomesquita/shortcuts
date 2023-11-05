@@ -1,11 +1,11 @@
 <template>
-    <div :class="{'fixed inset-0 opacity-25' : isDialogOpen}">
+    <div :class="{'fixed inset-0 opacity-25' : isDialogOpenShare || isDialogOpenCreateShortcut}">
         <!-- Menu -->
         <header >
             <Menu :isAuth="isAuth"/>
         </header>
 
-        <main class="container shadow shadow-secondary_300 mx-auto p-4 w-full h-full min-h-screen my-4">
+        <main class="container shadow shadow-secondary_300 mx-auto p-4 w-full h-full min-h-screen my-2">
             <!-- Feedback -->
             <div v-if="flashSuccess" class="success">
                 {{ flashSuccess }}
@@ -41,19 +41,26 @@
             <!-- Content -->
             <div class="mt-4">
                 <slot>Default</slot>
+
+                <!-- Button New Shorcut -->
+                <button-new-item iconName="new" :methodButton="changeDialogShareCreateShortcut" iconAlt="New Item" iconClass="h-8" />
             </div>
         </main>
     </div>
 
     <!-- Dialog Share -->
-    <share v-if="isDialogOpen" :methodChangeModal="changeDialogShare" />
+    <share v-if="isDialogOpenShare" :methodChangeModal="changeDialogShare" />
 
+    <!-- Dialog New Shortcut -->
+    <create v-if="isDialogOpenCreateShortcut" :methodChangeModal="changeDialogShareCreateShortcut" />
 </template>
 
 <script setup>
 import { usePage } from '@inertiajs/vue3'
 import { computed, ref } from 'vue';
+import ButtonNewItem from '@/Components/ButtonNewItem.vue';
 import Share from '@/Pages/Shortcut/Modal/Share.vue';
+import Create from '@/Pages/Shortcut/Modal/Create.vue';
 import Menu from '@/Components/Menu.vue';
 import Title from '@/Components/Title.vue'
 
@@ -69,7 +76,11 @@ const flashSuccess = computed(() => page.props.flash.success);
 const user = computed(() => page.props.user);
 const isAuth = user.value ? true : false;
 
-const isDialogOpen = ref(false);
-const changeDialogShare = () => isDialogOpen.value = !isDialogOpen.value;
+const isDialogOpenShare = ref(false);
+const changeDialogShare = () => isDialogOpenShare.value = !isDialogOpenShare.value;
+
+const isDialogOpenCreateShortcut = ref(false);
+const changeDialogShareCreateShortcut = () => isDialogOpenCreateShortcut.value = !isDialogOpenCreateShortcut.value;
+
 
 </script>

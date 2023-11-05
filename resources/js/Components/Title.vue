@@ -1,6 +1,6 @@
 <template>
     <div class="flex justify-center mt-5">
-        <h3 class="text-secondary dark:text-secondary_100 title-login mt-5">{{ titleName }}</h3>
+        <span class="text-secondary dark:text-secondary_100 mt-5 text-2xl font-medium pb-10">{{ titleName }}</span>
     </div>
 </template>
 

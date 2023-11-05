@@ -1,9 +1,9 @@
 <template>
-    <a :href="urlNewItem" :method="methodUrlNewItem" class="fixed bottom-4 right-4" type="submit">
+    <div @click="methodButton" class=" cursor-pointer fixed bottom-4 right-4" type="submit">
         <div class=" bg-primary items-center rounded-full p-4 cursor-pointer dark:bg-gray-800 hover:dark:bg-gray-700 shadow shadow-gray-500 hover:shadow-gray-700">
             <img :src="`/icons/${iconName}.svg`" :alt="iconAlt" :class="iconClass"/>
         </div>
-    </a>
+    </div>
 </template>
 
 <script>
@@ -14,12 +14,8 @@ export default {
       type: String,
       required: true
     },
-    urlNewItem: {
-      type: String,
-      required: true
-    },
-    methodUrlNewItem: {
-      type: String,
+    methodButton: {
+      type: Function,
       required: true
     },
     iconAlt: {

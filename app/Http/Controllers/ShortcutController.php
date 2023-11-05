@@ -36,11 +36,6 @@ class ShortcutController extends Controller
         return Inertia(PagesVue::PAGE_SHORTCUT_SHOW, ['shortcut' => $shortcut]);
     }
 
-    public function create()
-    {
-        return Inertia(PagesVue::PAGE_SHORTCUT_CREATE);
-    }
-
     public function store(CreateShortcutRequest $request)
     {
         $fieldsToSave = array_merge($request->all(), ['user_id' => $request->user()->id]);

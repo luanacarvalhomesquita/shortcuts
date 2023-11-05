@@ -44,11 +44,6 @@
             <div v-else class="py-5">
                 <span class="text-gray-400">Não há nenhum atalho para exibir.</span>
             </div>
-
-            <!-- Button New Shorcut -->
-            <div >
-                <button-new-item iconName="new" urlNewItem="/shortcut/create" methodUrlNewItem="GET" iconAlt="New Item" iconClass="h-8" />
-            </div>
         </div>
     </MainLayout>
 </template>
@@ -57,7 +52,6 @@
 import { useForm } from '@inertiajs/vue3'
 import Box from '@/Components/Box.vue';
 import ButtonBasic from '@/Components/ButtonBasic.vue';
-import ButtonNewItem from '@/Components/ButtonNewItem.vue';
 import PaginationCustom from '@/Components/PaginationCustom.vue';
 import TextField from '@/Components/TextField.vue';
 import MainLayout from '@/Layouts/MainLayout.vue'
