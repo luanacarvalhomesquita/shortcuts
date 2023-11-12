@@ -1,5 +1,5 @@
 <template>
-    <div :class="{'fixed inset-0 opacity-25' : isDialogOpenShare || isDialogOpenCreateShortcut}">
+    <div :class="{'fixed inset-0 opacity-25' : isDialogOpenShare || isDialogOpenCreateShortcut || isDialogOpenEditShortcut}">
         <!-- Menu -->
         <header >
             <Menu :isAuth="isAuth"/>
@@ -22,7 +22,38 @@
 
                 <!-- Buttons -->
                 <div class="w-full flex justify-end mt-4">
-                    <div class="lg:w-1/6 md:w-1/2 w-full flex justify-end">
+                    <!-- Trashed -->
+                    <div v-if="showTrashed" class="lg:w-1/6 md:w-1/2 w-full flex justify-end mr-2">
+                        <a
+                            class="bg-white hover:shadow-md hover:border-primary_300 border cursor-pointer border-primary rounded-sm shadow-sm shadow-gray-200 p-1 dark:bg-gray-800 dark:hover:dark:bg-gray-700 justify-center flex items-center w-full rounded-r-sm"
+                            href="/shortcut"
+                        >
+                            <span class="mr-4 text-primary text-sm">TELA INICIAL</span>
+                            <div class="flex">
+                                <div class="flex justify-center items-center">
+                                    <img src="/icons/back.svg" alt="Search" class="icon-sm"/>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Index No Trashed -->
+                    <div v-else class="lg:w-1/6 md:w-1/2 w-full flex justify-end mr-2">
+                        <a
+                            class="bg-white hover:shadow-md hover:border-primary_300 border cursor-pointer border-primary rounded-sm shadow-sm shadow-gray-200 p-1 dark:bg-gray-800 dark:hover:dark:bg-gray-700 justify-center flex items-center w-full rounded-r-sm"
+                            href="/shortcut/trashed"
+                        >
+                            <span class="mr-4 text-primary text-sm">ATALHOS EXCLUÍDOS</span>
+                            <div class="flex">
+                                <div class="flex justify-center items-center">
+                                    <img src="/icons/trashed.svg" alt="Search" class="icon-sm"/>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Share -->
+                    <div class="lg:w-1/6 md:w-1/2 w-full flex justify-end mr-2">
                         <div
                             class="bg-white hover:shadow-md hover:border-primary_300 border cursor-pointer border-primary rounded-sm shadow-sm shadow-gray-200 p-1 dark:bg-gray-800 dark:hover:dark:bg-gray-700 justify-center flex items-center w-full rounded-r-sm"
                             @click="changeDialogShare"
@@ -35,6 +66,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
 
@@ -43,7 +75,7 @@
                 <slot>Default</slot>
 
                 <!-- Button New Shorcut -->
-                <button-new-item iconName="new" :methodButton="changeDialogShareCreateShortcut" iconAlt="New Item" iconClass="h-8" />
+                <button-new-item iconName="new" :methodButton="changeDialogCreateShortcut" iconAlt="New Item" iconClass="h-8" />
             </div>
         </main>
     </div>
@@ -52,7 +84,7 @@
     <share v-if="isDialogOpenShare" :methodChangeModal="changeDialogShare" />
 
     <!-- Dialog New Shortcut -->
-    <create v-if="isDialogOpenCreateShortcut" :methodChangeModal="changeDialogShareCreateShortcut" />
+    <create v-if="isDialogOpenCreateShortcut" :methodChangeModal="changeDialogCreateShortcut" />
 </template>
 
 <script setup>
@@ -68,7 +100,15 @@ const props = defineProps({
     isMain: {
         type: Boolean,
         default: false
-    }
+    },
+    isDialogOpenEditShortcut: {
+        type: Boolean,
+        default: false
+    },
+    showTrashed: {
+        type: Boolean,
+        default: false
+    },
 });
 
 const page = usePage();
@@ -80,7 +120,6 @@ const isDialogOpenShare = ref(false);
 const changeDialogShare = () => isDialogOpenShare.value = !isDialogOpenShare.value;
 
 const isDialogOpenCreateShortcut = ref(false);
-const changeDialogShareCreateShortcut = () => isDialogOpenCreateShortcut.value = !isDialogOpenCreateShortcut.value;
-
+const changeDialogCreateShortcut = () => isDialogOpenCreateShortcut.value = !isDialogOpenCreateShortcut.value;
 
 </script>

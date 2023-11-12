@@ -25,4 +25,12 @@ class ShareShortcutRequest extends FormRequest
             'hash' => 'required|string',
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'hash.required' => 'O hash é obrigatório.',
+            'hash.string' => 'O hash deve ser uma string.',
+        ];
+    }
 }

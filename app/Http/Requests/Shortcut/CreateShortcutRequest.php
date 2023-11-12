@@ -35,4 +35,21 @@ class CreateShortcutRequest extends FormRequest
 
         return $rules;
     }
+
+    public function messages(): array
+    {
+        return [
+            'title.required' => 'O título é obrigatório.',
+            'title.string' => 'O título deve ser uma string.',
+            'title.max' => 'O título não pode ter mais de 50 caracteres.',
+
+            'note.string' => 'A nota deve ser uma string.',
+            'note.max' => 'A nota não pode ter mais de 2000 caracteres.',
+
+            'link.required' => 'O link é obrigatório.',
+            'link.url' => 'O link deve ser uma URL válida. Ex.: https://www.google.com',
+
+            'color.regex' => 'A cor deve estar no formato hexadecimal válido (#RRGGBB). Ex.: #FFFFFF',
+        ];
+    }
 }

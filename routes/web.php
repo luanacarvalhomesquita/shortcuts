@@ -27,8 +27,10 @@ Route::delete('logout', [AuthController::class, 'destroy'])->name('logout')->mid
 Route::get('register', [UserController::class, 'create']);
 Route::post('register', [UserController::class, 'store']);
 
+Route::patch('shortcut/{shortcut}/restore', [ShortcutController::class, 'restore'])->name('shortcut.restore')->withTrashed()->middleware('auth');
 Route::get('shortcut/share', [ShortcutController::class, 'share']);
-Route::put('shortcut/{shortcut}/restore', [ShortcutController::class, 'restore'])->name('shortcut.restore')->middleware('auth');
-Route::resource('shortcut', ShortcutController::class)->middleware('auth')->middleware('shortcut.owner');
+Route::get('shortcut/trashed', [ShortcutController::class, 'indexTrashed']);
+
+Route::resource('shortcut', ShortcutController::class)->middleware('auth')->withTrashed()->middleware('shortcut.owner');
 
 

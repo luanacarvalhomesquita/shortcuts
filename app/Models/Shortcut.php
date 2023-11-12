@@ -25,6 +25,24 @@ class Shortcut extends Model
         'deleted_at',
     ];
 
+    public function filterTrashedShortcuts(int $userId, Request $request)
+    {
+        $pageNumber = $request->input('page_number', 1);
+        $pageSize = $request->input('page_size', 16);
+
+        $query = $this->query()->where('user_id', $userId)->onlyTrashed();;
+
+        $textFilter = $request->input('text_filter');
+        if($textFilter) {
+            $query->where(function ($q) use ($textFilter) {
+                $q->where('title', 'like', "%$textFilter%")
+                  ->orWhere('note', 'like', "%$textFilter%");
+            });
+        }
+
+        return $query->paginate($pageSize, ['*'], 'page', $pageNumber);
+    }
+
     public function filterShortcuts(int $userId, Request $request)
     {
         $pageNumber = $request->input('page_number', 1);

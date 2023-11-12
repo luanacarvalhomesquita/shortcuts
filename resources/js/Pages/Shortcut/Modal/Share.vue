@@ -1,6 +1,6 @@
 <template>
     <Dialog>
-        <div class="flex flex-col h-full">
+        <div class="flex flex-col ">
             <div class="h-1/6  justify-end flex">
                 <a @click="closeDialog" class="p-2 shadow-sm cursor-pointer" type="submit" href="#">
                     <img src="/icons/times.svg" alt="Clear" class="h-5"/>
@@ -25,7 +25,11 @@
 
                 <!-- Buttons -->
                 <div class="flex justify-end mb-10">
-                    <button @click="copyToClipboard" class="btn-primary justify-center inline-block md:w-1/2 lg:w-1/4 w-full text-center cursor-pointer mt-5 items-end h-1/3 mr-2" type="submit">
+                    <button
+                        @click="copyToClipboard"
+                        class="btn-primary justify-center inline-block md:w-1/2 lg:w-1/4 w-full text-center cursor-pointer mt-5 items-end h-1/3 mr-2"
+                        type="submit"
+                    >
                         {{ textButtonCopy }}
                     </button>
                     <button @click="closeDialog" class="border border-primary hover:border-primary_600 text-primary p-2 justify-center  inline-block md:w-1/2 lg:w-1/4 w-full text-center cursor-pointer mt-5 items-end h-1/3 mr-2" type="submit">

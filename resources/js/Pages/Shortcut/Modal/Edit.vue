@@ -10,10 +10,10 @@
 
             <div class="h-5/6">
                 <!-- Title -->
-                <Title titleName="Novo Atalho" />
+                <Title titleName="Editando Atalho" />
 
                 <!-- Form New Shortcut -->
-                <form @submit.prevent="create">
+                <form @submit.prevent="edit">
 
                     <!-- title -->
                     <div class="mb-4">
@@ -106,6 +106,10 @@ const props = defineProps({
     methodChangeModal: {
         type: Function,
         required: true
+    },
+    shortcut: {
+        type: Object,
+        required: true
     }
 })
 
@@ -114,12 +118,15 @@ const closeDialog = () => {
 }
 
 const form = useForm({
-    title: '',
-    note: '',
-    link: '',
-    color: '',
+    title: props.shortcut.title,
+    note: props.shortcut.note,
+    link: props.shortcut.link,
+    color: props.shortcut.color,
 })
-const create = () => form.post('/shortcut')
+const edit = () => {
+    form.put(`/shortcut/${props.shortcut.id}`)
+    closeDialog()
+}
 
 </script>
 
@@ -129,7 +136,7 @@ import DialogLayout from '@/Layouts/DialogLayout.vue'
 export default {
     layout: DialogLayout,
     mounted() {
-        document.title = 'Novo Atalho - Atalhos';
+        document.title = 'Editando - Atalhos';
     }
 }
 </script>

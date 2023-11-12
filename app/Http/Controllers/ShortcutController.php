@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\PagesVue;
+use App\Helpers\RouteName;
 use App\Http\Requests\Shortcut\CreateShortcutRequest;
 use App\Http\Requests\Shortcut\ShareShortcutRequest;
 use App\Http\Requests\Shortcut\UpdateShortcutRequest;
@@ -27,6 +28,22 @@ class ShortcutController extends Controller
 
         return Inertia(PagesVue::PAGE_INDEX, [
             'shortcuts' => $shortcuts,
+            'filters' => $request->all([
+                'text_filter',
+                'page_size',
+                'page_number',
+            ]),
+        ]);
+    }
+
+    public function indexTrashed(Request $request)
+    {
+        $userId = $request->user()->id;
+
+        $trashedShortcuts = $this->shortcut->filterTrashedShortcuts($userId, $request);
+
+        return Inertia(PagesVue::PAGE_SHORTCUT_INDEX_TRASHED, [
+            'shortcuts' => $trashedShortcuts,
             'filters' => $request->all([
                 'text_filter',
                 'page_size',
@@ -66,18 +83,11 @@ class ShortcutController extends Controller
         return response()->json(status: 204);
     }
 
-    public function edit(Shortcut $shortcut)
-    {
-        $shortcut = Shortcut::find($shortcut->id);
-
-        return Inertia(PagesVue::PAGE_SHORTCUT_EDIT, ['shortcut' => $shortcut]);
-    }
-
     public function update(UpdateShortcutRequest $request, Shortcut $shortcut)
     {
         $shortcut->update($request->all());
 
-        return Inertia(PagesVue::PAGE_SHORTCUT_SHOW, ['shortcut' => $shortcut]);
+        return redirect()->route(RouteName::PAGE_SHORTCUT_SHOW, ['shortcut' => $shortcut]);
     }
 
     public function share(ShareShortcutRequest $request)
