@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ShortcutController;
@@ -26,6 +27,10 @@ Route::delete('logout', [AuthController::class, 'destroy'])->name('logout')->mid
 
 Route::get('register', [UserController::class, 'create']);
 Route::post('register', [UserController::class, 'store']);
+
+Route::get('/email/verify', [EmailVerificationController::class, 'show'])->middleware('auth')->name('verification.notice');
+Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'sendVerify'])->middleware(['auth', 'signed'])->name('verification.verify');
+Route::post('/email/verification-notification', [EmailVerificationController::class, 'resendVerify'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 Route::patch('shortcut/{shortcut}/restore', [ShortcutController::class, 'restore'])->name('shortcut.restore')->withTrashed()->middleware('auth');
 Route::get('shortcut/share', [ShortcutController::class, 'share']);

@@ -1,5 +1,10 @@
 <template>
-    <login-layout :openModalForgotPassword="openModalForgotPassword" :changeDialogForgotPassword="changeDialogForgotPassword">
+    <login-layout
+        :openModalForgotPassword="openModalForgotPassword"
+        :changeDialogForgotPassword="changeDialogForgotPassword"
+        :openModalRegister="openModalRegister"
+        :changeDialogRegister="changeDialogRegister"
+    >
         <!-- Error Message -->
         <box-text
             v-if="form.errors.email"
@@ -36,6 +41,13 @@
                 </button>
             </form>
         </div>
+
+         <!-- Button Register -->
+        <div class="flex w-full pt-2 justify-center">
+            <a @click="changeDialogRegister" class="border border-primary hover:border-primary_600 p-2 items-center justify-center flex w-full cursor-pointer text-primary" type="submit" href="#register">
+                CADASTRE-SE
+            </a>
+        </div>
     </login-layout>
 </template>
 
@@ -44,6 +56,7 @@ import { useForm } from '@inertiajs/vue3'
 import Title from '@/Components/Title.vue'
 import LoginLayout from '@/Layouts/LoginLayout.vue'
 import BoxText from '@/Components/BoxText.vue';
+import { ref } from 'vue'
 
 const form = useForm({
     email: null,
@@ -52,9 +65,15 @@ const form = useForm({
 
 const login = () => form.post('/login')
 
+// Forgot Password
 const openModalForgotPassword = ref(false)
 const changeDialogForgotPassword = () => {
     openModalForgotPassword.value = !openModalForgotPassword.value
+}
+// New User
+const openModalRegister = ref(false)
+const changeDialogRegister = () => {
+    openModalRegister.value = !openModalRegister.value
 }
 </script>
 

@@ -2,9 +2,9 @@
     <div
         class="relative justify-center"
         :class="{
-            'fixed inset-0 opacity-25 bg-gray-50' : openModalRegister,
-            'fixed inset-0 opacity-25 bg-gray-50' : openModalForgotPassword
-    }">
+            'fixed inset-0 opacity-25 bg-gray-50' : openModalForgotPassword || openModalRegister,
+        }"
+    >
         <!-- Show when size sm  -->
         <div class="lg:hidden md:hidden sm:flex bg-primary text-white justify-center">
             <span class="flex justify-center py-2">ATALHOS</span>
@@ -23,20 +23,13 @@
                 <div class="flex flex-col items-center justify-center">
                     <slot/>
                 </div>
-
-                <!-- Button Register -->
-                <div class="flex w-full pt-2 justify-center">
-                    <a @click="register" class="border border-primary hover:border-primary_600 p-2 items-center justify-center flex w-full cursor-pointer text-primary" type="submit" href="#register">
-                        CADASTRE-SE
-                    </a>
-                </div>
             </div>
         </div>
     </div>
 
     <!-- Dialog Register New User -->
     <div v-if="openModalRegister">
-        <create :methodCloseModal="register"/>
+        <create :methodCloseModal="changeDialogRegister"/>
     </div>
 
     <!-- Dialog Forgot Password -->
@@ -49,7 +42,6 @@
 
 import Create from '@/Pages/Auth/Modal/Create.vue'
 import ForgotPassword from '@/Pages/Auth/Modal/ForgotPassword.vue'
-import { ref } from 'vue'
 
 const props = defineProps({
     openModalForgotPassword: {
@@ -59,14 +51,16 @@ const props = defineProps({
     changeDialogForgotPassword: {
         type: Function,
         required: true
+    },
+    openModalRegister: {
+        type: Boolean,
+        required: true
+    },
+    changeDialogRegister: {
+        type: Function,
+        required: true
     }
 })
-
-// New User
-const openModalRegister = ref(false)
-const register = () => {
-    openModalRegister.value = !openModalRegister.value
-}
 </script>
 
 <style scoped>
